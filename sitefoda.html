@@ -22,7 +22,36 @@
         .hidden {
             display: none; /* Classe para esconder elementos */
         }
-        #typing-container {
+        #welcome-screen {
+            display: flex; /* Utiliza flexbox para centralizar conteúdo */
+            flex-direction: column; /* Coloca os elementos em coluna */
+            justify-content: center; /* Centraliza verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
+            text-align: center; /* Centraliza texto */
+            opacity: 1; /* Opacidade inicial */
+            transition: opacity 3.5s; /* Duração da transição de fade-out */
+        }
+        h1 {
+            font-size: 4rem; /* Tamanho do título aumentado */
+            margin-bottom: 15px; /* Margem entre o título e o botão */
+            font-family: 'Comic Neue', cursive; /* Fonte mais amigável para o título */
+            color: #00ff00; /* Cor do texto do título */
+        }
+        button {
+            background-color: #00ff00; /* Cor de fundo do botão */
+            color: black; /* Cor do texto do botão */
+            border: none;
+            border-radius: 8px; /* Bordas arredondadas no botão */
+            padding: 15px 30px; /* Aumenta o padding para o botão */
+            font-size: 1.5rem; /* Tamanho do botão aumentado */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s; /* Efeito de transição ao passar o mouse */
+        }
+        button:hover {
+            background-color: #00cc00; /* Efeito ao passar o mouse */
+            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+        }
+        .phrase-container {
             font-size: 2rem; /* Tamanho do texto aumentado */
             margin-bottom: 10px;
             text-align: center; /* Centraliza o texto de máquina de escrever */
@@ -42,20 +71,6 @@
             top: 50%; /* Centraliza verticalmente */
             transform: translate(-50%, -50%); /* Ajusta para centralizar completamente */
         }
-        button {
-            background-color: #00ff00; /* Cor de fundo do botão */
-            color: black; /* Cor do texto do botão */
-            border: none;
-            border-radius: 8px; /* Bordas arredondadas no botão */
-            padding: 15px 30px; /* Aumenta o padding para o botão */
-            font-size: 1.5rem; /* Tamanho do botão aumentado */
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s; /* Efeito de transição ao passar o mouse */
-        }
-        button:hover {
-            background-color: #00cc00; /* Efeito ao passar o mouse */
-            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
-        }
     </style>
 </head>
 <body>
@@ -65,8 +80,10 @@
     Seu navegador não suporta a tag de áudio.
 </audio>
 
-<!-- Removemos a tela de boas-vindas -->
-<button id="enter-button">Entrar</button>
+<div id="welcome-screen">
+    <h1>Bem-vindo ao meu site!</h1>
+    <button id="enter-button">Entrar</button>
+</div>
 
 <div id="typing-container" class="hidden"></div>
 
@@ -130,19 +147,37 @@
         document.body.appendChild(finalMessage); // Adiciona a mensagem final ao corpo
     }
 
+    // Função para entrar em tela cheia
+    function requestFullscreen() {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari e Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+    }
+
     // Função chamada ao clicar no botão de entrar
     document.getElementById('enter-button').addEventListener('click', () => {
         playAudio(); // Toca o áudio
 
-        // Aplica as transições de fundo e cor instantaneamente
+        // Transição de saída da tela de apresentação
+        const welcomeScreen = document.getElementById('welcome-screen');
+        welcomeScreen.style.opacity = 0; // Inicia o fade out
+
+        // Aplica a transição de fundo e cor para preto
         document.body.style.backgroundColor = "black"; 
         document.body.style.color = "white"; 
 
-        // Esconde o botão e mostra o container de digitação
-        document.getElementById('enter-button').style.display = 'none'; 
-        document.getElementById('typing-container').classList.remove('hidden'); 
-
-        type(); // Começa a digitar as frases
+        // Aguarda a transição terminar antes de esconder a tela
+        setTimeout(() => {
+            welcomeScreen.classList.add('hidden'); // Esconde a tela de boas-vindas
+            document.getElementById('typing-container').classList.remove('hidden'); // Mostra o container de texto
+            type(); // Começa a digitar as frases
+        }, 3500); // Tempo deve ser igual à duração da transição (3.5 segundos)
     });
 
     // Inicia a tela cheia após 2 segundos
