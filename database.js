@@ -49,7 +49,7 @@ const youtubo_db = {
             style: {
                 fontFamily: "'Tahoma', 'Papyrus', sans-serif",
                 pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
-                windowColor: "#241010", // Cor das janelas
+                windowColor: "#aa2d2d", // Cor das janelas
                 textColor: "#be4444",
                 borderColor: "#3a0000",
                 linkColor: '#b20303',
