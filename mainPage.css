@@ -1,106 +1,51 @@
-/* mainPage.css - Estilo YouTube 2006 */
-
-body {
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    background-color: #fff;
-    color: #333;
-    font-size: 12px;
-    margin: 0;
-    text-align: center; /* Centraliza o container principal */
-}
-
+/* mainPage.css - Estilo YouTube 2006 COMPLETO */
+body { font-family: 'Arial', 'Helvetica', sans-serif; background-color: #fff; color: #333; font-size: 12px; margin: 0; text-align: center; }
 a { color: #003399; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* --- HEADER --- */
-#header {
-    background-color: #f4f4f4;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/* --- Header & Nav --- */
+#header { background-color: #f4f4f4; border-bottom: 1px solid #ccc; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
 #logo { height: 30px; border: none; }
-#search-bar { display: flex; }
-#search-bar input { padding: 4px; border: 1px solid #999; }
-#search-bar button { padding: 4px 8px; border: 1px solid #999; background: #eee; }
+#search-form { display: flex; }
+#search-form input { padding: 4px; border: 1px solid #999; }
+#search-form button { padding: 4px 8px; border: 1px solid #999; background: #eee; }
 #header-links { font-size: 11px; }
-
-/* --- BARRA DE NAVEGAÇÃO --- */
-#nav-bar {
-    background-color: #e5ecf9;
-    border-bottom: 1px solid #b7c7e0;
-    padding: 5px 0;
-    text-align: center;
-    font-weight: bold;
-}
+#nav-bar { background-color: #e5ecf9; border-bottom: 1px solid #b7c7e0; padding: 5px 0; text-align: center; font-weight: bold; }
 #nav-bar a { margin: 0 15px; }
 
-/* --- CONTAINER DA PÁGINA --- */
-#page-container {
-    width: 960px;
-    margin: 20px auto;
-    display: flex;
-    gap: 20px;
-    text-align: left; /* Alinha o texto dentro dos containers à esquerda */
-}
+/* --- Layout Principal --- */
+#page-container { width: 960px; margin: 20px auto; display: flex; gap: 20px; text-align: left; }
 #main-content { flex: 2; }
 #sidebar { flex: 1; }
-
-/* --- MÓDULOS --- */
-.module {
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-}
-.module-header {
-    background-color: #e5ecf9;
-    border-bottom: 1px solid #b7c7e0;
-    padding: 3px 10px;
-}
-.module-header h3 {
-    font-size: 14px;
-    color: #333;
-    margin: 0;
-}
+.module { border: 1px solid #ccc; margin-bottom: 20px; }
+.module-header { background-color: #e5ecf9; border-bottom: 1px solid #b7c7e0; padding: 3px 10px; }
+.module-header h3 { font-size: 14px; color: #333; margin: 0; }
 .module-content { padding: 10px; }
+.dotted-hr { border: none; border-top: 1px dotted #ccc; margin: 15px 0; }
 
-/* --- GRADE DE VÍDEOS --- */
-#video-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-.video-item {
-    display: flex;
-    gap: 10px;
-    width: 100%; /* Ocupa a largura toda para o estilo de lista */
-    border-bottom: 1px dotted #ccc;
-    padding-bottom: 10px;
-}
-.thumbnail {
-    width: 120px;
-    height: 90px;
-    object-fit: cover;
-    border: 1px solid #999;
-}
-.video-info .video-title {
-    font-size: 14px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-.video-info .video-channel {
-    font-size: 11px;
-    color: #555;
-}
+/* --- Videos --- */
+.video-item { display: flex; gap: 10px; width: 100%; border-bottom: 1px dotted #ccc; padding-bottom: 10px; margin-bottom: 10px; }
+.thumbnail { width: 120px; height: 90px; object-fit: cover; border: 1px solid #999; }
+.video-info .video-title { font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px; }
+#video-grid-full { display: flex; flex-wrap: wrap; gap: 20px; }
+#video-grid-full .video-item { width: calc(50% - 10px); flex-direction: column; border: none; } /* Grade 2x2 */
 
-/* --- SIDEBAR --- */
-#promo-box { text-align: center; }
-#promo-box h4 { margin: 0 0 10px 0; }
-#promo-box img { width: 100%; margin-bottom: 10px; }
+/* --- Channels --- */
+#channel-list .channel-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px dotted #ccc; }
+.channel-pic { width: 50px; height: 50px; border: 1px solid #ccc; }
+.channel-info { flex-grow: 1; }
+.channel-info h4 { margin: 0 0 5px 0; }
+.subscribe-btn { padding: 4px 10px; font-weight: bold; }
 
-#login-form label { display: block; margin-bottom: 3px; font-weight: bold; }
-#login-form input { width: 100%; box-sizing: border-box; margin-bottom: 10px; padding: 3px; }
-#login-form button { font-weight: bold; }
-#signup-link { display: block; margin-top: 10px; text-align: right; }
+/* --- Community (Guestbook) --- */
+#guestbook-posts .post { border-bottom: 1px dotted #ccc; padding: 10px 0; }
+#guestbook-posts .post-header { font-weight: bold; color: #003399; }
+#guestbook-posts .post-time { font-size: 10px; color: #777; }
+#guestbook-form textarea { width: 100%; height: 60px; box-sizing: border-box; margin-bottom: 10px; }
+
+/* --- Login/Register --- */
+.login-form label { display: block; margin-bottom: 3px; font-weight: bold; }
+.login-form input { width: 100%; box-sizing: border-box; margin-bottom: 10px; padding: 3px; }
+.login-form button { font-weight: bold; }
+.form-switch-link { display: block; margin-top: 10px; text-align: right; }
+.welcome-box p { margin: 0 0 10px 0; }
