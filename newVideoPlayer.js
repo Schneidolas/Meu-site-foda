@@ -231,7 +231,7 @@ const annotationsLayer = document.getElementById('annotations-layer');
 // Mini banco de dados de anotações (você pode mover para o database.js se preferir)
 const annotations_db = {
     'gmod': [
-        { text: 'se inscreva no canal!', startTime: 5, endTime: 10, top: '10%', left: '70%' },
+        { text: 'se inscreva no canal!', startTime: 1, endTime: 100, top: '10%', left: '70%' },
         { text: 'kkkkkkkkkkkk', startTime: 25, endTime: 28, top: '80%', left: '40%' }
     ],
     'cscz': [
