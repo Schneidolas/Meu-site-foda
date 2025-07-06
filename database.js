@@ -59,8 +59,8 @@ const youtubo_db = {
                 playerBarBg: "url('https://cdn.pfps.gg/banners/8859-elmo-s-hell-fire.gif')",
             }
         },
-        'CanalNostalgia': {
-            name: 'CanalNostalgia',
+        'M@ast3rB4nan@': {
+            name: 'M@ast3rB4nan@',
             profilePic: 'https://i.imgur.com/sZ4zL8A.png',
             banner: 'https://i.imgur.com/kY7aJ9T.jpeg',
             bio: 'Relembrando os melhores momentos da TV e da internet antiga.',
