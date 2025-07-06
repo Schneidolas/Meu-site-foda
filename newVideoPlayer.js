@@ -44,6 +44,34 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.textContent = videoData.channelId;
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
+    const sidebar = document.getElementById('sidebar-column');
+const allVideoIds = Object.keys(youtubo_db.videos);
+const currentVideoIndex = allVideoIds.indexOf(videoId);
+
+// Remove o vídeo atual da lista de recomendações
+if (currentVideoIndex > -1) {
+    allVideoIds.splice(currentVideoIndex, 1);
+}
+
+// Embaralha e pega alguns vídeos para recomendar
+const recommendedVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 5); // Recomenda até 5 vídeos
+
+recommendedVideos.forEach(recVideoId => {
+    const recVideoData = youtubo_db.videos[recVideoId];
+    const item = document.createElement('div');
+    item.className = 'recommended-video-item';
+    item.innerHTML = `
+        <a href="videoPlayer.html?v=${recVideoData.id}">
+            <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
+        </a>
+        <div class="recommended-video-info">
+            <a href="videoPlayer.html?v=${recVideoData.id}">${recVideoData.title}</a>
+            <span>by ${recVideoData.channelId}</span>
+        </div>
+    `;
+    sidebar.appendChild(item);
+});
+
     // --- 4. APLICAR ESTILO DO CANAL ---
      const channelData = youtubo_db.channels[videoData.channelId];
     if (channelData && channelData.style) {
