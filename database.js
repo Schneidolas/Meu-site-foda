@@ -55,7 +55,7 @@ const youtubo_db = {
                 linkColor: '#b20303',
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
-                windowBgImage: "https://wallpapers.com/images/hd/rage-comics-faces-meme-xkb1a97vt1j8pqcd.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
+                windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
                 playerBarBg: "url('https://cdn.pfps.gg/banners/8859-elmo-s-hell-fire.gif')",
             }
         },
@@ -74,7 +74,7 @@ const youtubo_db = {
                 linkColor: '#00cc00',
                 windowShadow: false,
                 windowGloss: false,
-                windowBgImage: "https://i.imgur.com/jQ7BvA5.png",
+                windowBgImage: "https://wallpapers.com/images/hd/rage-comics-faces-meme-xkb1a97vt1j8pqcd.jpg",
                 playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         },
