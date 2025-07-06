@@ -45,32 +45,61 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
     const sidebar = document.getElementById('sidebar-column');
-const allVideoIds = Object.keys(youtubo_db.videos);
-const currentVideoIndex = allVideoIds.indexOf(videoId);
+    const allVideoIds = Object.keys(youtubo_db.videos);
+    const currentVideoIndex = allVideoIds.indexOf(videoId);
+    
+    // Remove o vídeo atual da lista de recomendações
+    if (currentVideoIndex > -1) {
+        allVideoIds.splice(currentVideoIndex, 1);
+    }
+    
+    // Embaralha e pega alguns vídeos para recomendar
+    const recommendedVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 5); // Recomenda até 5 vídeos
+    
+    recommendedVideos.forEach(recVideoId => {
+        const recVideoData = youtubo_db.videos[recVideoId];
+        const item = document.createElement('div');
+        item.className = 'recommended-video-item';
+        item.innerHTML = `
+            <a href="videoPlayer.html?v=${recVideoData.id}">
+                <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
+            </a>
+            <div class="recommended-video-info">
+                <a href="videoPlayer.html?v=${recVideoData.id}">${recVideoData.title}</a>
+                <span>by ${recVideoData.channelId}</span>
+            </div>
+        `;
+        sidebar.appendChild(item);
+    });
 
-// Remove o vídeo atual da lista de recomendações
-if (currentVideoIndex > -1) {
-    allVideoIds.splice(currentVideoIndex, 1);
-}
-
-// Embaralha e pega alguns vídeos para recomendar
-const recommendedVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 5); // Recomenda até 5 vídeos
-
-recommendedVideos.forEach(recVideoId => {
-    const recVideoData = youtubo_db.videos[recVideoId];
-    const item = document.createElement('div');
-    item.className = 'recommended-video-item';
-    item.innerHTML = `
-        <a href="videoPlayer.html?v=${recVideoData.id}">
-            <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
-        </a>
-        <div class="recommended-video-info">
-            <a href="videoPlayer.html?v=${recVideoData.id}">${recVideoData.title}</a>
-            <span>by ${recVideoData.channelId}</span>
-        </div>
-    `;
-    sidebar.appendChild(item);
-});
+    // --- LÓGICA PARA TELA FINAL ---
+    const endScreen = document.getElementById('end-screen');
+    
+    videoPlayer.addEventListener('ended', () => {
+        endScreen.innerHTML = ''; // Limpa a tela final
+        endScreen.style.display = 'flex';
+    
+        // Pega 2 vídeos recomendados para mostrar na tela final
+        const endScreenVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 2);
+    
+        endScreenVideos.forEach(recVideoId => {
+            const recVideoData = youtubo_db.videos[recVideoId];
+            const item = document.createElement('div');
+            item.className = 'end-screen-video';
+            item.innerHTML = `
+                <a href="videoPlayer.html?v=${recVideoData.id}">
+                    <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
+                    <span>${recVideoData.title}</span>
+                </a>
+            `;
+            endScreen.appendChild(item);
+        });
+    });
+    
+    // Esconde a tela final se o usuário tocar o vídeo de novo
+    videoPlayer.addEventListener('play', () => {
+        endScreen.style.display = 'none';
+    });
 
     // --- 4. APLICAR ESTILO DO CANAL ---
      const channelData = youtubo_db.channels[videoData.channelId];
