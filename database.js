@@ -50,9 +50,9 @@ const youtubo_db = {
                 fontFamily: "'Tahoma', 'Verdana', sans-serif",
                 pageBg: "url('https://i.imgur.com/vXDWqIHg.jpg')", // Fundo da página
                 windowColor: "#000000", // Cor das janelas
-                textColor: "#000000",
-                borderColor: "#cccccc",
-                linkColor: '#0055aa',
+                textColor: "#dad7d7",
+                borderColor: "#3a0000",
+                linkColor: '#b20303',
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "", // URL para imagem de fundo da janela (deixar em branco se não usar)
