@@ -45,17 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
     // --- 4. APLICAR ESTILO DO CANAL ---
-    const channelData = youtubo_db.channels[videoData.channelId];
+     const channelData = youtubo_db.channels[videoData.channelId];
     if (channelData && channelData.style) {
         const style = channelData.style;
         const styleElement = document.getElementById('custom-channel-styles');
         if (styleElement) {
              styleElement.innerHTML = `
                 body { background: ${style.pageBg || '#f1f1f1'}; font-family: ${style.fontFamily || 'Tahoma'}; }
-                .module { background-color: ${style.windowColor || '#fff'}; border-color: ${style.borderColor || '#ccc'}; color: ${style.textColor || '#000'};
-                    ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
-                    ${style.windowShadow ? 'box-shadow: 0 2px 5px rgba(0,0,0,0.1);' : ''} }
-                #video-description-box a, .module-header h3, .comment-user { color: ${style.linkColor || '#0055aa'}; }`;
+                
+                /* Estilos dos módulos (com background-size: cover;) */
+                .module { 
+                    background-color: ${style.windowColor || '#fff'}; 
+                    border-color: ${style.borderColor || '#ccc'}; 
+                    color: ${style.textColor || '#000'};
+                    ${style.windowBgImage ? `background-image: url('${style.windowBgImage}'); background-size: cover; background-repeat: no-repeat;` : ''}
+                    ${style.windowShadow ? 'box-shadow: 0 2px 5px rgba(0,0,0,0.1);' : ''} 
+                }
+                
+                #video-description-box a, .module-header h3, .comment-user { color: ${style.linkColor || '#0055aa'}; }
+                
+                /* NOVO: Estilo customizado para a barra do player! */
+                #custom-controls {
+                    background: ${style.playerBarBg || 'linear-gradient(to bottom, #4a4a4a, #2b2b2b)'};
+                }
+             `;
         }
     }
 
