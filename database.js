@@ -55,7 +55,7 @@ const youtubo_db = {
                 linkColor: '#b20303',
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
-                windowBgImage: "https://wallpapercave.com/wp/wp2647297.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
+                windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
             }
         },
         'CanalNostalgia': {
