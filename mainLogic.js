@@ -34,7 +34,41 @@ document.addEventListener('DOMContentLoaded', () => {
             dynamicContent.innerHTML = '';
             dynamicContent.appendChild(template);
         },
-        community: () => { /* ... (implementação futura) ... */ },
+        community: () => {
+            const template = document.getElementById('template-community').content.cloneNode(true);
+            const postsContainer = template.getElementById('guestbook-posts');
+            const form = template.getElementById('guestbook-form');
+            const input = template.getElementById('guestbook-input');
+
+            // Carrega posts salvos
+            const posts = JSON.parse(localStorage.getItem('youtubo_guestbook') || '[]');
+            postsContainer.innerHTML = '';
+            posts.reverse().forEach(post => { // .reverse() para mostrar os mais novos primeiro
+                const postEl = document.createElement('div');
+                postEl.className = 'post';
+                postEl.innerHTML = `<p><span class="post-header">${post.user || 'Anonymous'}</span> <span class="post-time">(${new Date(post.time).toLocaleString()})</span></p><p>${post.text}</p>`;
+                postsContainer.appendChild(postEl);
+            });
+
+            // Lida com o envio de um novo post
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const text = input.value.trim();
+                if (text) {
+                    const newPost = {
+                        user: currentUser || 'Anonymous', // Usa o usuário logado ou "Anonymous"
+                        text: text,
+                        time: new Date().toISOString()
+                    };
+                    posts.unshift(newPost); // Adiciona no início do array
+                    localStorage.setItem('youtubo_guestbook', JSON.stringify(posts));
+                    renderers.community(); // Recarrega a página da comunidade para mostrar o novo post
+                }
+            });
+
+            dynamicContent.innerHTML = '';
+            dynamicContent.appendChild(template);
+        },
         search: (query) => { /* ... (implementação futura) ... */ },
         profile: () => {
             if (!currentUser) { renderers.home(); return; }
