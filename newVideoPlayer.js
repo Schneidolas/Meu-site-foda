@@ -199,31 +199,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     updateStars(parseInt(localStorage.getItem(ratingKey) || 0));
 
-    // --- 7. LÓGICA DE COMENTÁRIOS ---
+     // --- 7. LÓGICA DE COMENTÁRIOS ---
     const commentsKey = `youtubo_comments_${videoId}`;
-    const renderComment = (comment) => {
-        const el = document.createElement('div');
-        el.className = 'comment-post';
-        el.innerHTML = `<p><a href="#" class="comment-user">${comment.user}</a> <span class="comment-time">(${comment.time})</span></p><p>${comment.text}</p>`;
-        commentList.prepend(el);
-    };
-    const loadComments = () => {
-        const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
-        commentList.innerHTML = '';
-        comments.forEach(renderComment);
-    };
+    const renderComment = (comment) => { /* ... (função renderComment continua igual) ... */ };
+    const loadComments = () => { /* ... (função loadComments continua igual) ... */ };
+    
     postBtn.addEventListener('click', () => {
         const text = commentInput.value.trim();
         if (!text) return;
-        const newComment = { user: 'Visitante', text: text, time: 'agora' };
+        
+        // --- ALTERAÇÃO AQUI ---
+        // Pega o usuário do localStorage, se não existir, usa "Visitante"
+        const username = localStorage.getItem('youtubo_user') || 'Visitante';
+        
+        const newComment = { user: username, text: text, time: 'agora' };
+        // --- FIM DA ALTERAÇÃO ---
+
         const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
         comments.push(newComment);
         localStorage.setItem(commentsKey, JSON.stringify(comments));
         renderComment(newComment);
         commentInput.value = '';
     });
+    
     loadComments();
-});
 
 // --- LÓGICA PARA ANOTAÇÕES ---
 const annotationsLayer = document.getElementById('annotations-layer');
