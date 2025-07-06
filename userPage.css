@@ -1,57 +1,21 @@
-/* userPage.css - VERSÃO "BLOCUDA" E COM MAIS BRILHO */
-
-body { margin: 0; font-family: 'Tahoma', sans-serif; }
+body { margin: 0; }
 a { text-decoration: none; }
 #content-wrapper { width: 960px; margin: 20px auto; }
-
-/* LAYOUT DAS JANELAS (MÓDULOS) */
-.module {
-    border: 1px solid #ccc;
-    background: #fff;
-    margin-bottom: 15px;
-    position: relative;
-    border-radius: 0; /* <-- EFEITO "BLOCUDO" */
-    background-size: cover; /* <-- IMAGEM DE FUNDO ESTICADA/PREENCHIDA */
-    background-position: center;
-    z-index: 0;
-}
-.module-header { padding: 2px 15px; border-bottom: 1px solid #ccc; }
-.module-header h3 { font-size: 14px; margin: 8px 0; }
-.module-content { padding: 15px; }
-
-/* BANNER */
+.module { border: 1px solid #ccc; background: #fff; margin-bottom: 15px; position: relative; border-radius: 8px; z-index: 0; }
 #channel-banner { height: 178px; overflow: hidden; }
 #channel-banner img { width: 100%; height: 100%; object-fit: cover; }
-
-/* CAIXA DE PERFIL */
 #profile-box { padding: 15px; display: flex; align-items: flex-start; gap: 20px; }
-#profile-pic { width: 88px; height: 88px; border: 1px solid #333; flex-shrink: 0; z-index: 2; }
+#profile-pic { width: 88px; height: 88px; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); flex-shrink: 0; z-index: 2; }
 .profile-details { flex-grow: 1; z-index: 2; }
 .profile-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .profile-header h3 { margin: 0; font-size: 24px; }
 #channel-bio { margin: 0 0 15px 0; line-height: 1.5; }
 #channel-stats { font-size: 14px; font-weight: bold; }
-
-/* BOTÃO COM MAIS BRILHO */
-#subscribe-btn {
-    font-size: 16px; font-weight: bold; padding: 8px 20px;
-    cursor: pointer;
-    border: 1px solid #777;
-    border-radius: 3px;
-    color: #333;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-    background: linear-gradient(to bottom, #ffffff, #e1e1e1);
-    /* Sombra mais forte para o efeito de brilho */
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.7), 0 2px 3px rgba(0,0,0,0.3);
-    transition: all 0.1s ease-in-out;
-}
-#subscribe-btn:hover { border-color: #555; background: linear-gradient(to bottom, #ffffff, #efefef); }
-#subscribe-btn.subscribed {
-    background: #e9e9e9; color: #888; border-color: #dcdcdc;
-    cursor: default; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-/* Grade de vídeos */
+#subscribe-btn { font-size: 16px; font-weight: bold; padding: 8px 20px; border-radius: 5px; cursor: pointer; border: 1px solid #c6c6c6; color: #333; text-shadow: 0 1px 0 #fff; background: linear-gradient(to bottom, #fff, #e1e1e1); }
+#subscribe-btn.subscribed { background: #e9e9e9; color: #888; border-color: #dcdcdc; cursor: default; }
+.module-header { padding: 2px 15px; border-bottom: 1px solid #ccc; }
+.module-header h3 { font-size: 14px; margin: 8px 0; }
+.module-content { padding: 15px; }
 #video-grid { display: flex; flex-wrap: wrap; gap: 15px; }
 .video-item { width: 150px; text-align: center; }
 .video-item b { font-size: 12px; }
