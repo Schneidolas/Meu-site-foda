@@ -12,19 +12,22 @@
         <h1 id="video-title">Carregando...</h1>
         <div id="video-container-2007">
             <video id="video-player"></video>
+            <!-- CONTROLES ADICIONADOS AQUI -->
             <div id="custom-controls">
                 <button id="play-pause-btn">▶</button>
-                <div id="progress-bar"><div id="progress-filled"></div></div>
+                <button id="volume-btn">🔊</button>
+                <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="1">
                 <span id="time-display">00:00 / 00:00</span>
+                <div id="progress-bar"><div id="progress-filled"></div></div>
+                <button id="quality-btn">SD</button>
+                <button id="fullscreen-btn">⛶</button>
             </div>
         </div>
         <div id="action-bar">
+            <!-- (Resto do HTML igual ao anterior) -->
             <div id="ratings-container" class="ratings">
-                <span class="star" data-value="1">☆</span><span class="star" data-value="2">☆</span><span class="star" data-value="3">☆</span><span class="star" data-value="4">☆</span><span class="star" data-value="5">☆</span>
-            </div>
-            <div class="action-buttons-group">
-              <button class="action-button">Share</button>
-              <button class="action-button">Flag</button>
+                <span class="star" data-value="1">☆</span><span class="star" data-value="2">☆</span><span class="star" data-value="3">☆</span><span class="star" data-value="4">☆</span><span class="star"
+ data-value="5">☆</span>
             </div>
         </div>
         <div id="video-description-box" class="module">
@@ -42,9 +45,7 @@
             </div>
         </div>
     </div>
-    <div id="sidebar-column">
-        <!-- Sidebar para vídeos recomendados, etc. -->
-    </div>
+    <div id="sidebar-column"></div>
 </div>
 <script src="database.js"></script>
 <script src="newVideoPlayer.js"></script>
