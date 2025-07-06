@@ -1,25 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. CARREGAR DADOS BÁSICOS ---
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('v');
     const videoData = youtubo_db.videos[videoId];
 
-    if (!videoData) {
-        document.body.innerHTML = '<h1>Erro: Vídeo não encontrado.</h1>';
-        return;
-    }
-    
-    // --- 2. ELEMENTOS DO DOM ---
+    if (!videoData) { return; }
+
+    // --- ELEMENTOS DO DOM ---
+    const videoContainer = document.getElementById('video-container-2007');
     const videoPlayer = document.getElementById('video-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
-    const progressFilled = document.getElementById('progress-filled');
+    const volumeBtn = document.getElementById('volume-btn');
+    const volumeSlider = document.getElementById('volume-slider');
     const timeDisplay = document.getElementById('time-display');
-    const stars = document.querySelectorAll('#ratings-container .star');
-    const commentInput = document.getElementById('comment-input');
-    const postBtn = document.getElementById('post-comment-btn');
-    const commentList = document.getElementById('comment-list');
+    const progressBar = document.getElementById('progress-bar');
+    const progressFilled = document.getElementById('progress-filled');
+    const qualityBtn = document.getElementById('quality-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
     
-    // --- 3. INICIALIZAR PLAYER E INFORMAÇÕES ---
+    // --- INICIALIZAR PLAYER ---
     videoPlayer.src = videoData.url;
     document.title = `${videoData.title} - YouTubo`;
     document.getElementById('video-title').textContent = videoData.title;
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.textContent = videoData.channelId;
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
-    // --- 4. LÓGICA DO PLAYER (PLAY, PAUSE, PROGRESSO) ---
+    // --- LÓGICA DO PLAYER (PLAY, PAUSE, PROGRESSO) ---
     const togglePlay = () => { videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause(); };
     videoPlayer.addEventListener('play', () => { playPauseBtn.textContent = '❚❚'; });
     videoPlayer.addEventListener('pause', () => { playPauseBtn.textContent = '▶'; });
@@ -36,13 +34,42 @@ document.addEventListener('DOMContentLoaded', () => {
     videoPlayer.addEventListener('click', togglePlay);
 
     videoPlayer.addEventListener('timeupdate', () => {
-        const progressPercent = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-        progressFilled.style.width = `${progressPercent}%`;
+        progressFilled.style.width = `${(videoPlayer.currentTime / videoPlayer.duration) * 100}%`;
         const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
         timeDisplay.textContent = `${formatTime(videoPlayer.currentTime)} / ${formatTime(videoPlayer.duration)}`;
     });
-    document.getElementById('progress-bar').addEventListener('click', (e) => {
-        videoPlayer.currentTime = (e.offsetX / e.currentTarget.offsetWidth) * videoPlayer.duration;
+    progressBar.addEventListener('click', (e) => {
+        videoPlayer.currentTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
+    });
+
+    // --- 5. LÓGICA PARA NOVOS CONTROLES ---
+    // VOLUME
+    const handleVolume = () => {
+        videoPlayer.volume = volumeSlider.value;
+        if (videoPlayer.volume > 0.5) volumeBtn.textContent = '🔊';
+        else if (videoPlayer.volume > 0) volumeBtn.textContent = '🔉';
+        else volumeBtn.textContent = '🔇';
+    };
+    volumeBtn.addEventListener('click', () => {
+        videoPlayer.muted = !videoPlayer.muted;
+        volumeBtn.textContent = videoPlayer.muted ? '🔇' : '🔊';
+    });
+    volumeSlider.addEventListener('input', handleVolume);
+
+    // QUALIDADE (COSMÉTICO)
+    qualityBtn.addEventListener('click', () => {
+        const isActive = qualityBtn.classList.toggle('active');
+        qualityBtn.textContent = isActive ? 'HD' : 'SD';
+        videoPlayer.classList.toggle('video-player-hd', isActive);
+    });
+
+    // TELA CHEIA
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            videoContainer.requestFullscreen().catch(err => alert(`Erro: ${err.message}`));
+        } else {
+            document.exitFullscreen();
+        }
     });
 
     // --- 5. LÓGICA DE AVALIAÇÃO (ESTRELAS) ---
