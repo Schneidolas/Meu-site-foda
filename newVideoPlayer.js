@@ -80,17 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
         endScreen.style.display = 'flex';
     
         // Pega 2 vídeos recomendados para mostrar na tela final
-        const endScreenVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 2);
+        const endScreenVideos = allVideoIds.sort(() => 0.5 - Math.random()).slice(0, 4); 
     
         endScreenVideos.forEach(recVideoId => {
             const recVideoData = youtubo_db.videos[recVideoId];
-            const item = document.createElement('div');
+            const item = document.createElement('a'); // Agora é um link direto
+            item.href = `videoPlayer.html?v=${recVideoData.id}`;
             item.className = 'end-screen-video';
             item.innerHTML = `
-                <a href="videoPlayer.html?v=${recVideoData.id}">
-                    <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
-                    <span>${recVideoData.title}</span>
-                </a>
+                <img src="${recVideoData.thumbnail}" alt="${recVideoData.title}">
+                <div class="overlay">${recVideoData.title}</div>
             `;
             endScreen.appendChild(item);
         });
