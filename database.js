@@ -27,14 +27,6 @@ const youtubo_db = {
             thumbnail: 'https://i9.ytimg.com/vi/cKqmOk0_Xco/mqdefault.jpg?v=64a4d6ba&sqp=COziqsMG&rs=AOn4CLA1QUHybvaQVjWFVZmUSEje-E2rgg',
             description: 'o manoel gomes vai te pegar de noite se vc nn se inscrever ashuashuashaushausha',
             channelId: 'M@ast3rB4nan@'
-        },
-        'cat_fail': {
-            id: 'cat_fail',
-            title: 'MEU GATO FAZENDO PARKOUR (EPIC FAIL!!!)',
-            url: 'https://archive.org/download/fail-compilation-2012/Fail%20Compilation%202012.mp4',
-            thumbnail: 'https://i.ytimg.com/vi/fTczCp_yY6k/hqdefault.jpg',
-            description: 'Gravei meu gato Miau-Miau tentando pular da estante. Não deu muito certo kkkkk',
-            channelId: 'xX_G4m3r_Xx'
         }
     },
 
@@ -75,25 +67,6 @@ const youtubo_db = {
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
-                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
-            }
-        },
-         'xX_G4m3r_Xx': {
-            name: 'xX_G4m3r_Xx',
-            profilePic: 'https://i.imgur.com/6XyqE9p.jpeg',
-            banner: 'https://i.imgur.com/9C3A8s5.gif',
-            bio: 'VIDEOS DE JOGOS E FAILS ENGRAÇADOS!! SE INSCREVA!!1!',
-            subscribers: 5421,
-            style: {
-                fontFamily: "'Comic Sans MS', cursive",
-                pageBg: "url('https://www.din.ca/images/starfield.gif')",
-                windowColor: "#000033",
-                textColor: "#FFFFFF",
-                borderColor: "#FF00FF",
-                linkColor: '#00FFFF',
-                windowShadow: true,
-                windowGloss: false,
-                windowBgImage: "",
                 playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         }
