@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('custom-channel-styles').innerHTML = `
             body { background: ${style.pageBg}; font-family: ${style.fontFamily}; }
             .module { background-color: ${style.windowColor}; border-color: ${style.borderColor}; color: ${style.textColor};
-                ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
+                ${style.windowBgImage ? `background-image: url('${style.windowBgImage}'); background-size: cover; background-repeat: no-repeat;` : ''}
                 ${style.windowShadow ? 'box-shadow: 0 4px 10px rgba(0,0,0,0.15);' : ''} }
             .module a, .module-header h3 { color: ${style.linkColor}; }
             ${style.windowGloss ? `.module::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
