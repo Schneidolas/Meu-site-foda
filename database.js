@@ -56,7 +56,7 @@ const youtubo_db = {
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
-                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
+                playerBarBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')",
             }
         },
         'CanalNostalgia': {
