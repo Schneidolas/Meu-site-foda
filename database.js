@@ -56,6 +56,7 @@ const youtubo_db = {
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
+                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         },
         'CanalNostalgia': {
@@ -74,6 +75,7 @@ const youtubo_db = {
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "https://i.imgur.com/jQ7BvA5.png",
+                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         },
          'xX_G4m3r_Xx': {
@@ -92,6 +94,7 @@ const youtubo_db = {
                 windowShadow: true,
                 windowGloss: false,
                 windowBgImage: "",
+                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         }
     }
