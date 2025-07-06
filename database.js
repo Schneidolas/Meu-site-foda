@@ -46,6 +46,9 @@ const youtubo_db = {
             banner: 'https://i.imgur.com/AsSrpQp.png', // URL corrigida para a imagem completa
             bio: 'Meu nome é Schneider, faço vídeos para internet, acho que é só isso ._.',
             subscribers: 28345,
+            myInfos: {},
+            channelPage_Categories: ['All Videos'],
+            channelPage_Abas: false,
             style: {
                 fontFamily: "'Tahoma', 'Papyrus', sans-serif",
                 pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
@@ -56,6 +59,7 @@ const youtubo_db = {
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
+                borderType: 'flat'
             }
         },
         'CanalNostalgia': {
@@ -64,6 +68,9 @@ const youtubo_db = {
             banner: 'https://i.imgur.com/kY7aJ9T.jpeg',
             bio: 'Relembrando os melhores momentos da TV e da internet antiga.',
             subscribers: 125987,
+            myInfos: {},
+            channelPage_Categories: ['All Videos'],
+            channelPage_Abas: false,
             style: {
                 fontFamily: "'Courier New', monospace",
                 pageBg: "#222222",
@@ -74,6 +81,7 @@ const youtubo_db = {
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "https://i.imgur.com/jQ7BvA5.png",
+                borderType: 'round'
             }
         },
          'xX_G4m3r_Xx': {
@@ -82,6 +90,9 @@ const youtubo_db = {
             banner: 'https://i.imgur.com/9C3A8s5.gif',
             bio: 'VIDEOS DE JOGOS E FAILS ENGRAÇADOS!! SE INSCREVA!!1!',
             subscribers: 5421,
+            myInfos: { "ME ADD NO MYSPACE": "https://myspace.com" },
+            channelPage_Categories: ['All Videos', 'My Infos'],
+             channelPage_Abas: true,
             style: {
                 fontFamily: "'Comic Sans MS', cursive",
                 pageBg: "url('https://www.din.ca/images/starfield.gif')",
@@ -92,6 +103,7 @@ const youtubo_db = {
                 windowShadow: true,
                 windowGloss: false,
                 windowBgImage: "",
+                borderType: 'wobbly'
             }
         }
     }
