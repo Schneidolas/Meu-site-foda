@@ -229,17 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- LÓGICA PARA ANOTAÇÕES ---
 const annotationsLayer = document.getElementById('annotations-layer');
 
-// Mini banco de dados de anotações (você pode mover para o database.js se preferir)
-const annotations_db = {
-    'gmod': [
-        { text: 'se inscreva no canal!', startTime: 5, endTime: 10, top: '10%', left: '70%' },
-        { text: 'kkkkkkkkkkkk', startTime: 25, endTime: 28, top: '80%', left: '40%' }
-    ],
-    'cscz': [
-        { text: 'LIKE NO VÍDEO', startTime: 2, endTime: 7, top: '5%', left: '5%' }
-    ]
-};
-
 const videoAnnotations = annotations_db[videoId] || [];
 
 videoPlayer.addEventListener('timeupdate', () => {
