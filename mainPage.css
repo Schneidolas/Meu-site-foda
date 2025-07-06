@@ -1,11 +1,106 @@
-body { background-color: #333399; background-image: url('https://www.din.ca/images/starfield.gif'); font-family: 'Times New Roman', serif; color: #FFFFFF; }
-hr { border: 2px dashed yellow; }
-.main-container { width: 800px; margin: 20px auto; background-color: #000033; border: 5px outset #C0C0C0; padding: 15px; }
-h1, h2 { font-family: 'Comic Sans MS', cursive; color: #FF00FF; text-align: center; }
-a { color: #00FFFF; font-weight: bold; }
-a:hover { color: #FFFF00; }
-#video-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.video-item { background-color: #2c2c54; border: 3px inset #C0C0C0; padding: 10px; text-align: center; width: 220px; }
-.video-item b { display: block; margin-top: 5px; }
-.thumbnail { width: 200px; height: 150px; object-fit: cover; border: 2px solid white; }
-.thumbnail:hover { border-color: yellow; }
+/* mainPage.css - Estilo YouTube 2006 */
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background-color: #fff;
+    color: #333;
+    font-size: 12px;
+    margin: 0;
+    text-align: center; /* Centraliza o container principal */
+}
+
+a { color: #003399; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- HEADER --- */
+#header {
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#logo { height: 30px; border: none; }
+#search-bar { display: flex; }
+#search-bar input { padding: 4px; border: 1px solid #999; }
+#search-bar button { padding: 4px 8px; border: 1px solid #999; background: #eee; }
+#header-links { font-size: 11px; }
+
+/* --- BARRA DE NAVEGAÇÃO --- */
+#nav-bar {
+    background-color: #e5ecf9;
+    border-bottom: 1px solid #b7c7e0;
+    padding: 5px 0;
+    text-align: center;
+    font-weight: bold;
+}
+#nav-bar a { margin: 0 15px; }
+
+/* --- CONTAINER DA PÁGINA --- */
+#page-container {
+    width: 960px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+    text-align: left; /* Alinha o texto dentro dos containers à esquerda */
+}
+#main-content { flex: 2; }
+#sidebar { flex: 1; }
+
+/* --- MÓDULOS --- */
+.module {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.module-header {
+    background-color: #e5ecf9;
+    border-bottom: 1px solid #b7c7e0;
+    padding: 3px 10px;
+}
+.module-header h3 {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+.module-content { padding: 10px; }
+
+/* --- GRADE DE VÍDEOS --- */
+#video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.video-item {
+    display: flex;
+    gap: 10px;
+    width: 100%; /* Ocupa a largura toda para o estilo de lista */
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 10px;
+}
+.thumbnail {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border: 1px solid #999;
+}
+.video-info .video-title {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+.video-info .video-channel {
+    font-size: 11px;
+    color: #555;
+}
+
+/* --- SIDEBAR --- */
+#promo-box { text-align: center; }
+#promo-box h4 { margin: 0 0 10px 0; }
+#promo-box img { width: 100%; margin-bottom: 10px; }
+
+#login-form label { display: block; margin-bottom: 3px; font-weight: bold; }
+#login-form input { width: 100%; box-sizing: border-box; margin-bottom: 10px; padding: 3px; }
+#login-form button { font-weight: bold; }
+#signup-link { display: block; margin-top: 10px; text-align: right; }
