@@ -4,14 +4,12 @@
     <title>Assistindo Vídeo - YouTubo</title>
     <link rel="stylesheet" href="newVideoPlayer.css">
     <meta charset="UTF-8">
-    <!-- Estilos dinâmicos do canal do vídeo serão injetados aqui -->
     <style id="custom-channel-styles"></style>
 </head>
 <body>
-
 <div id="page-content">
     <div id="main-column">
-        <h1 id="video-title">Carregando vídeo...</h1>
+        <h1 id="video-title">Carregando...</h1>
         <div id="video-container-2007">
             <video id="video-player"></video>
             <div id="custom-controls">
@@ -23,17 +21,22 @@
                 <button id="fullscreen-btn">⛶</button>
             </div>
         </div>
+          </div>
+        <!-- Barra de ações com as estrelas -->
         <div id="action-bar">
             <div id="ratings-container" class="ratings">
-                <span class="star" data-value="1">☆</span><span class="star" data-value="2">☆</span><span class="star" data-value="3">☆</span><span class="star" data-value="4">☆</span><span class="star" data-value="5">☆</span>
+                <span class="star" data-value="1">☆</span>
+                <span class="star" data-value="2">☆</span>
+                <span class="star" data-value="3">☆</span>
+                <span class="star" data-value="4">☆</span>
+                <span class="star" data-value="5">☆</span>
             </div>
         </div>
         <!-- Adicionada a classe 'module' para receber o estilo -->
-        <div id="video-description-box" class="module">
+         <div id="video-description-box" class="module">
             <p><strong>De: <a id="channel-link" href="#"></a></strong></p>
             <p id="video-description"></p>
         </div>
-        <!-- Adicionada a classe 'module' para receber o estilo -->
         <div id="comments-module" class="module">
             <div class="module-header"><h3>Comentários</h3></div>
             <div class="module-content">
@@ -45,8 +48,11 @@
             </div>
         </div>
     </div>
-    <div id="sidebar-column">
-        <!-- Sidebar content... -->
+ <div id="sidebar-column" class="module">
+        <div class="module-header"><h3>Recomendados</h3></div>
+        <div id="sidebar-video-list" class="module-content">
+            <!-- Vídeos recomendados vão aqui -->
+        </div>
     </div>
 </div>
 
