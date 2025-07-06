@@ -9,7 +9,7 @@ const youtubo_db = {
             // !!! URL CORRIGIDA !!! - GitHub não funciona para streaming de vídeo direto. Use um host como o Internet Archive.
             url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/review%20de%20garrys%20mod.mp4',
             thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4000/ss_c13ffded1d71bedfa7ede94c11cbd21fbd21a32c.1920x1080.jpg?t=1736937068',
-            description: 'Gameplay nostálgica de GMod, um clássico da Steam!',
+            description: 'esse jogo é muito legal o.o',
             channelId: 'Schneidola$'
         },
         'cscz': {
@@ -17,7 +17,7 @@ const youtubo_db = {
             title: 'counter strike condition zero',
             url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/counter%20strike%20condition%20zero.mp4',
             thumbnail: 'https://upload.wikimedia.org/wikipedia/pt/f/f3/Counter-Strike_Condition_Zero.jpg',
-            description: 'Jogando uma das melhores missões do CS:CZ. Pura nostalgia!',
+            description: 'deixa as 5 estrela se ñ suas bola vão cair >:]',
             channelId: 'Schneidola$'
         },
         'spongebob': {
