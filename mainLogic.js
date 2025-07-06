@@ -1,121 +1,110 @@
-// mainLogic.js - O CÉREBRO DE TODAS AS PÁGINAS
+// mainLogic.js - VERSÃO CORRIGIDA E CENTRALIZADA
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pageId = document.body.id; // Vamos usar IDs no body para saber qual página estamos
+    const dynamicContent = document.getElementById('dynamic-content');
+    const navLinks = document.querySelectorAll('#nav-bar a');
     let currentUser = localStorage.getItem('youtubo_user');
 
-    // --- FUNÇÕES GLOBAIS ---
-    function renderHeader() {
+    // --- RENDERIZADORES DE CONTEÚDO ---
+    const renderers = {
+        home: () => {
+            const template = document.getElementById('template-home').content.cloneNode(true);
+            const videoGrid = template.getElementById('video-grid');
+            Object.values(youtubo_db.videos).slice(0, 4).forEach(video => renderVideoItem(video, videoGrid, 'list'));
+            setupLogin(template.getElementById('login-module'));
+            dynamicContent.innerHTML = '';
+            dynamicContent.appendChild(template);
+        },
+        videos: () => {
+            const template = document.getElementById('template-videos').content.cloneNode(true);
+            const videoGrid = template.getElementById('video-grid-full');
+            Object.values(youtubo_db.videos).forEach(video => renderVideoItem(video, videoGrid, 'grid'));
+            dynamicContent.innerHTML = '';
+            dynamicContent.appendChild(template);
+        },
+        channels: () => {
+            const template = document.getElementById('template-channels').content.cloneNode(true);
+            const channelList = template.getElementById('channel-list');
+            Object.values(youtubo_db.channels).forEach(channel => {
+                const item = document.createElement('div');
+                item.className = 'channel-item';
+                item.innerHTML = `<img src="${channel.profilePic}" class="channel-pic"><div class="channel-info"><h4>${channel.name}</h4><span>${channel.subscribers.toLocaleString()} subscribers</span></div><button class="subscribe-btn">Subscribe</button>`;
+                channelList.appendChild(item);
+            });
+            dynamicContent.innerHTML = '';
+            dynamicContent.appendChild(template);
+        },
+        community: () => { /* ... (implementação futura) ... */ },
+        search: (query) => { /* ... (implementação futura) ... */ },
+        profile: () => {
+            if (!currentUser) { renderers.home(); return; }
+            const template = document.getElementById('template-profile').content.cloneNode(true);
+            template.getElementById('profile-username').textContent = currentUser;
+            dynamicContent.innerHTML = '';
+            dynamicContent.appendChild(template);
+        }
+    };
+
+    function renderVideoItem(video, container, type) {
+        const item = document.createElement('div');
+        item.className = 'video-item';
+        if (type === 'list') {
+            item.innerHTML = `<a href="videoPlayer.html?v=${video.id}"><img src="${video.thumbnail}" class="thumbnail"></a><div class="video-info"><a href="videoPlayer.html?v=${video.id}" class="video-title">${video.title}</a><span class="video-channel">From: <a href="userPage.html?id=${video.channelId}">${video.channelId}</a></span></div>`;
+        } else { // grid
+            item.innerHTML = `<a href="videoPlayer.html?v=${video.id}"><img src="${video.thumbnail}" class="thumbnail"></a><div class="video-info"><a href="videoPlayer.html?v=${video.id}" class="video-title">${video.title}</a></div>`;
+        }
+        container.appendChild(item);
+    }
+
+    // --- LÓGICA DE LOGIN ---
+    function setupLogin(container) {
+        if (!container) return;
+        if (currentUser) {
+            container.innerHTML = `<div class="module-header"><h3>Welcome!</h3></div><div class="module-content welcome-box"><p>You are logged in as <strong>${currentUser}</strong>.</p><a href="#" data-page="profile">My Profile</a></div>`;
+            container.querySelector('[data-page="profile"]').addEventListener('click', (e) => { e.preventDefault(); renderers.profile(); });
+        } else {
+            container.innerHTML = `<div class="module-header"><h3>Member Login</h3></div><div class="module-content"><form class="login-form" id="main-login-form"><label>User Name:</label><input type="text" id="username"><button type="submit">Login / Register</button></form></div>`;
+            container.querySelector('#main-login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const user = container.querySelector('#username').value.trim();
+                if (user) {
+                    localStorage.setItem('youtubo_user', user);
+                    currentUser = user;
+                    setupHeader();
+                    renderers.home();
+                }
+            });
+        }
+    }
+    
+    function setupHeader() {
         const headerLinks = document.getElementById('header-links');
         if (currentUser) {
             headerLinks.innerHTML = `Welcome, <strong>${currentUser}</strong> | <a href="#" id="logout-btn">Log Out</a>`;
-            document.getElementById('logout-btn').addEventListener('click', () => {
+            headerLinks.querySelector('#logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
                 localStorage.removeItem('youtubo_user');
-                window.location.reload();
+                currentUser = null;
+                setupHeader();
+                renderers.home();
             });
         } else {
-            headerLinks.innerHTML = `<a href="#">Sign Up</a> | <a href="#">Log In</a>`;
+            headerLinks.innerHTML = ``; // Limpo, pois o login está na sidebar
         }
     }
 
-    function handleSearch() {
-        const searchForm = document.getElementById('search-form');
-        const searchInput = document.getElementById('search-input');
-        searchForm.addEventListener('submit', (e) => {
+    // --- NAVEGAÇÃO ---
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm) {
-                window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+            const page = e.target.dataset.page;
+            if (renderers[page]) {
+                renderers[page]();
             }
         });
-    }
+    });
 
-    // --- LÓGICA POR PÁGINA ---
-
-    // Lógica para a PÁGINA INICIAL (index.html)
-    if (document.querySelector('#video-grid')) {
-        const videoGrid = document.getElementById('video-grid');
-        // Pega os 4 primeiros vídeos como "Featured"
-        Object.values(youtubo_db.videos).slice(0, 4).forEach(video => {
-            const videoElement = document.createElement('div');
-            videoElement.className = 'video-item';
-            videoElement.innerHTML = `...`; // Lógica de renderização igual à anterior
-            videoGrid.appendChild(videoElement);
-        });
-
-        // Lógica de Login/Registro
-        const loginModule = document.getElementById('login-module');
-        if (currentUser) {
-            loginModule.innerHTML = `<div class="module-header"><h3>Welcome!</h3></div><div class="module-content welcome-box"><p>You are logged in as <strong>${currentUser}</strong>.</p><a href="#">My Profile</a></div>`;
-        } else {
-            loginModule.innerHTML = `
-                <div class="module-header"><h3>Member Login</h3></div>
-                <div class="module-content">
-                    <form class="login-form" id="login-form-main">
-                        <label>User Name:</label><input type="text" id="username">
-                        <button type="submit">Login</button>
-                        <a href="#" class="form-switch-link" id="show-register">New? Sign up!</a>
-                    </form>
-                    <form class="login-form" id="register-form-main" style="display:none;">
-                        <label>Choose a User Name:</label><input type="text" id="new-username">
-                        <button type="submit">Register</button>
-                        <a href="#" class="form-switch-link" id="show-login">Have an account? Login.</a>
-                    </form>
-                </div>`;
-            
-            const loginForm = document.getElementById('login-form-main');
-            const registerForm = document.getElementById('register-form-main');
-            
-            document.getElementById('show-register').addEventListener('click', () => { loginForm.style.display = 'none'; registerForm.style.display = 'block'; });
-            document.getElementById('show-login').addEventListener('click', () => { loginForm.style.display = 'block'; registerForm.style.display = 'none'; });
-
-            loginForm.addEventListener('submit', (e) => { e.preventDefault(); const user = document.getElementById('username').value.trim(); if (user) { localStorage.setItem('youtubo_user', user); window.location.reload(); } });
-            registerForm.addEventListener('submit', (e) => { e.preventDefault(); const user = document.getElementById('new-username').value.trim(); if (user) { localStorage.setItem('youtubo_user', user); window.location.reload(); } });
-        }
-    }
-
-    // Lógica para a PÁGINA DE VÍDEOS (videos.html)
-    if (document.querySelector('#video-grid-full')) {
-        const videoGridFull = document.getElementById('video-grid-full');
-        Object.values(youtubo_db.videos).forEach(video => {
-            const videoElement = document.createElement('div');
-            videoElement.className = 'video-item';
-            videoElement.innerHTML = `...`; // Mesma lógica de renderização
-            videoGridFull.appendChild(videoElement);
-        });
-    }
-
-    // Lógica para a PÁGINA DE CANAIS (channels.html)
-    if (document.querySelector('#channel-list')) {
-        const channelList = document.getElementById('channel-list');
-        Object.values(youtubo_db.channels).forEach(channel => {
-            const channelElement = document.createElement('div');
-            channelElement.className = 'channel-item';
-            channelElement.innerHTML = `...`; // Lógica de renderização de canal
-            channelList.appendChild(channelElement);
-        });
-    }
-
-    // Lógica para a PÁGINA DE BUSCA (search.html)
-    if (document.querySelector('#search-video-grid')) {
-        const params = new URLSearchParams(window.location.search);
-        const searchTerm = params.get('q')?.toLowerCase() || '';
-        document.getElementById('search-results-title').textContent = `Search Results for "${searchTerm}"`;
-        const searchGrid = document.getElementById('search-video-grid');
-        const results = Object.values(youtubo_db.videos).filter(v => v.title.toLowerCase().includes(searchTerm));
-        if (results.length > 0) {
-            results.forEach(video => { /* renderiza os vídeos */ });
-        } else {
-            searchGrid.innerHTML = `<p>No videos found.</p>`;
-        }
-    }
-
-    // Lógica para a PÁGINA DE COMUNIDADE (community.html)
-    if (document.querySelector('#guestbook-posts')) {
-        // ... Lógica para carregar e salvar posts do guestbook no localStorage ...
-    }
-
-    // --- Executa funções globais em todas as páginas ---
-    renderHeader();
-    handleSearch();
+    // --- INICIALIZAÇÃO ---
+    renderers.home(); // Carrega a página inicial por padrão
+    setupHeader();
 });
