@@ -20,10 +20,10 @@ const youtubo_db = {
             description: 'deixa as 5 estrela se ñ suas bola vão cair >:]',
             channelId: 'Schneidola$'
         },
-        'spongebob': {
-            id: 'spongebob',
-            title: 'Bob Esponja cantando Rock - Rasguei as Calças',
-            url: 'https://ia803201.us.archive.org/17/items/spongebob-rip-pants-song/Spongebob%20Rip%20Pants%20Song.mp4',
+        'gmodZoeira': {
+            id: 'gmodZoeira',
+            title: 'A fúria de Manoel gomes! - gmod',
+            url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/A%20F%C3%BAria%20de%20Manoel%20Gomes%20-%20Garry's%20Mod.mp3',
             thumbnail: 'https://i.imgur.com/b9Jc8zI.png',
             description: 'O hit do verão da Fenda do Biquini. Um clássico do rock cantado pelo Bob Esponja.',
             channelId: 'CanalNostalgia'
