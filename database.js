@@ -67,14 +67,14 @@ const youtubo_db = {
             subscribers: 125987,
             style: {
                 fontFamily: "'Comic Sans', Papyrus",
-                pageBg: "#222222",
+                pageBg: "url('https://wallpapers.com/images/hd/rage-comics-faces-meme-xkb1a97vt1j8pqcd.jpg')",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
                 borderColor: "#444444",
                 linkColor: '#00cc00',
                 windowShadow: false,
                 windowGloss: false,
-                windowBgImage: "https://wallpapers.com/images/hd/rage-comics-faces-meme-xkb1a97vt1j8pqcd.jpg",
+                windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
                 playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
             }
         },
