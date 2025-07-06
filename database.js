@@ -45,7 +45,7 @@ const youtubo_db = {
             profilePic: 'https://media.tenor.com/hO9By4ph_I8AAAAM/speak.gif',
             banner: 'https://i.imgur.com/AsSrpQp.png', // URL corrigida para a imagem completa
             bio: 'Meu nome é Schneider, faço vídeos para internet, acho que é só isso ._.',
-            subscribers: 28345,
+            subscribers: 226,
             style: {
                 fontFamily: "'Tahoma', 'Papyrus', sans-serif",
                 pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
