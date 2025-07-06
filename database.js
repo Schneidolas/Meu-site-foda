@@ -48,7 +48,7 @@ const youtubo_db = {
             subscribers: 28345,
             style: {
                 fontFamily: "'Tahoma', 'Verdana', sans-serif",
-                pageBg: "#e1e1e1", // Fundo da página
+                pageBg: "#000000", // Fundo da página
                 windowColor: "#FFFFFF", // Cor das janelas
                 textColor: "#000000",
                 borderColor: "#cccccc",
