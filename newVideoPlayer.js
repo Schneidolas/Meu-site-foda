@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. ELEMENTOS DO DOM ---
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('v');
+    const videoData = youtubo_db.videos[videoId];
+
+    if (!videoData) { return; }
+
+    // --- ELEMENTOS DO DOM ---
     const videoContainer = document.getElementById('video-container-2007');
     const videoPlayer = document.getElementById('video-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
@@ -10,37 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressFilled = document.getElementById('progress-filled');
     const qualityBtn = document.getElementById('quality-btn');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-    // --- 2. CARREGAR DADOS DO VÍDEO ---
-    const params = new URLSearchParams(window.location.search);
-    const videoId = params.get('v');
-    const videoData = youtubo_db.videos[videoId];
-    if (!videoData) return;
-
-    // --- 3. LÓGICA DE QUALIDADE (ANTES DE CARREGAR) ---
-    const hasMultipleQualities = typeof videoData.url === 'object';
-    if (hasMultipleQualities) {
-        videoPlayer.src = videoData.url.SD; // Carrega SD por padrão
-        qualityBtn.disabled = false;
-    } else {
-        videoPlayer.src = videoData.url; // Carrega a única URL disponível
-        qualityBtn.disabled = true; // Desabilita o botão se não houver opções
-    }
-
-    // --- 4. INICIALIZAR INFORMAÇÕES DA PÁGINA ---
+    
+    // --- INICIALIZAR PLAYER ---
+    videoPlayer.src = videoData.url;
     document.title = `${videoData.title} - YouTubo`;
-    // ... (resto do código para popular título, descrição, etc.)
+    document.getElementById('video-title').textContent = videoData.title;
+    document.getElementById('video-description').textContent = videoData.description;
+    const channelLink = document.getElementById('channel-link');
+    channelLink.textContent = videoData.channelId;
+    channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
-    // --- 5. LÓGICA FUNCIONAL DOS CONTROLES ---
-
-    // PLAY / PAUSA
+    // --- LÓGICA DO PLAYER (PLAY, PAUSE, PROGRESSO) ---
     const togglePlay = () => { videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause(); };
     videoPlayer.addEventListener('play', () => { playPauseBtn.textContent = '❚❚'; });
     videoPlayer.addEventListener('pause', () => { playPauseBtn.textContent = '▶'; });
     playPauseBtn.addEventListener('click', togglePlay);
     videoPlayer.addEventListener('click', togglePlay);
 
-    // BARRA DE PROGRESSO E TEMPO
     videoPlayer.addEventListener('timeupdate', () => {
         progressFilled.style.width = `${(videoPlayer.currentTime / videoPlayer.duration) * 100}%`;
         const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -50,44 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
         videoPlayer.currentTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
     });
 
-    // CONTROLE DE VOLUME (FUNCIONAL)
+    // --- 5. LÓGICA PARA NOVOS CONTROLES ---
+    // VOLUME
     const handleVolume = () => {
         videoPlayer.volume = volumeSlider.value;
-        videoPlayer.muted = volumeSlider.value == 0;
-        if (videoPlayer.muted) volumeBtn.textContent = '🔇';
-        else if (videoSlider.value > 0.5) volumeBtn.textContent = '🔊';
-        else volumeBtn.textContent = '🔉';
+        if (videoPlayer.volume > 0.5) volumeBtn.textContent = '🔊';
+        else if (videoPlayer.volume > 0) volumeBtn.textContent = '🔉';
+        else volumeBtn.textContent = '🔇';
     };
     volumeBtn.addEventListener('click', () => {
         videoPlayer.muted = !videoPlayer.muted;
-        volumeSlider.value = videoPlayer.muted ? 0 : videoPlayer.volume;
-        handleVolume();
+        volumeBtn.textContent = videoPlayer.muted ? '🔇' : '🔊';
     });
     volumeSlider.addEventListener('input', handleVolume);
-    handleVolume(); // Define o estado inicial
 
-    // MUDANÇA DE QUALIDADE (FUNCIONAL)
+    // QUALIDADE (COSMÉTICO)
     qualityBtn.addEventListener('click', () => {
-        if (qualityBtn.disabled) return;
-        const currentTime = videoPlayer.currentTime;
-        const wasPaused = videoPlayer.paused;
-        const isHD = qualityBtn.classList.toggle('active');
-
-        qualityBtn.textContent = isHD ? 'HD' : 'SD';
-        videoPlayer.src = isHD ? videoData.url.HD : videoData.url.SD;
-
-        videoPlayer.addEventListener('loadeddata', () => {
-            videoPlayer.currentTime = currentTime;
-            if (!wasPaused) {
-                videoPlayer.play();
-            }
-        }, { once: true }); // O listener só roda uma vez para evitar loops
+        const isActive = qualityBtn.classList.toggle('active');
+        qualityBtn.textContent = isActive ? 'HD' : 'SD';
+        videoPlayer.classList.toggle('video-player-hd', isActive);
     });
 
-    // TELA CHEIA (FUNCIONAL)
+    // TELA CHEIA
     fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
-            videoContainer.requestFullscreen().catch(err => alert(`Não foi possível entrar em tela cheia: ${err.message}`));
+            videoContainer.requestFullscreen().catch(err => alert(`Erro: ${err.message}`));
         } else {
             document.exitFullscreen();
         }
