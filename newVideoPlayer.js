@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoId = params.get('v');
     const videoData = youtubo_db.videos[videoId];
     const videoPlayer = document.getElementById('video-player');
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('v');
+    const videoData = youtubo_db.videos[videoId];
 
     if (!videoData || !videoPlayer) {
         document.body.innerHTML = '<h1>Erro 404: Vídeo não encontrado ou player quebrado.</h1><a href="index.html">Voltar para a home</a>';
@@ -25,6 +28,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. LÓGICA DO PLAYER (SIMPLIFICADA E CORRIGIDA) ---
     const playPauseBtn = document.getElementById('play-pause-btn');
+    const ratingsContainer = document.getElementById('ratings-container');
+    const stars = ratingsContainer.querySelectorAll('.star');
+    const ratingKey = `youtubo_rating_${videoId}`;
+
+    const updateStars = (rating) => {
+        stars.forEach(star => {
+            star.textContent = star.dataset.value <= rating ? '★' : '☆';
+        });
+    };
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = star.dataset.value;
+            localStorage.setItem(ratingKey, rating);
+            updateStars(rating);
+        });
+    });
+
+    // Carrega a nota salva quando a página abre
+    updateStars(localStorage.getItem(ratingKey) || 0);
+
+    // --- NOVO: LÓGICA DE COMENTÁRIOS ---
+    const commentInput = document.getElementById('comment-input');
+    const postBtn = document.getElementById('post-comment-btn');
+    const commentList = document.getElementById('comment-list');
+    const commentsKey = `youtubo_comments_${videoId}`;
+
+    const renderComment = (comment) => {
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment-post';
+        commentEl.innerHTML = `
+            <p class="comment-user">Visitante <span class="comment-time">(${comment.time})</span></p>
+            <p>${comment.text}</p>
+        `;
+        commentList.prepend(commentEl); // Adiciona o mais novo no topo
+    };
+
+    const loadComments = () => {
+        const savedComments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        commentList.innerHTML = '';
+        savedComments.forEach(renderComment);
+    };
+
+    postBtn.addEventListener('click', () => {
+        const text = commentInput.value.trim();
+        if (!text) return;
+
+        const newComment = {
+            text: text,
+            time: new Date().toLocaleString('pt-BR')
+        };
+
+        const allComments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        allComments.push(newComment);
+        localStorage.setItem(commentsKey, JSON.stringify(allComments));
+        
+        renderComment(newComment);
+        commentInput.value = '';
+    });
+
+    loadComments(); // Carrega os comentários salvos
+
+    // --- NOVO: LÓGICA DA SIDEBAR DE RECOMENDAÇÕES ---
+    const sidebarList = document.getElementById('sidebar-video-list');
+    const allVideoIds = Object.keys(youtubo_db.videos);
+    // Filtra para não mostrar o vídeo atual na sidebar
+    const recommendedIds = allVideoIds.filter(id => id !== videoId);
+    
+    // Embaralha e pega os 5 primeiros
+    recommendedIds.sort(() => 0.5 - Math.random());
+    const videosToShow = recommendedIds.slice(0, 5);
+
+    videosToShow.forEach(id => {
+        const video = youtubo_db.videos[id];
+        const videoEl = document.createElement('div');
+        videoEl.className = 'sidebar-video-item';
+        videoEl.innerHTML = `
+            <a href="videoPlayer.html?v=${id}">
+                <img src="${video.thumbnail}" class="sidebar-thumbnail">
+                <div class="sidebar-video-title">${video.title}</div>
+            </a>
+        `;
+        sidebarList.appendChild(videoEl);
+    });
 
     // A função principal de tocar/pausar
     const togglePlay = () => {
