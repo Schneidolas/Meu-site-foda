@@ -18,14 +18,32 @@
                 <span id="time-display">00:00 / 00:00</span>
             </div>
         </div>
+        <div id="action-bar">
+            <div id="ratings-container" class="ratings">
+                <span class="star" data-value="1">☆</span><span class="star" data-value="2">☆</span><span class="star" data-value="3">☆</span><span class="star" data-value="4">☆</span><span class="star" data-value="5">☆</span>
+            </div>
+            <div class="action-buttons-group">
+              <button class="action-button">Share</button>
+              <button class="action-button">Flag</button>
+            </div>
+        </div>
         <div id="video-description-box" class="module">
             <p><strong>De: <a id="channel-link" href="#"></a></strong></p>
             <p id="video-description"></p>
         </div>
         <div id="comments-module" class="module">
             <div class="module-header"><h3>Comentários</h3></div>
-            <div class="module-content"></div>
+            <div class="module-content">
+                <div class="add-comment-box">
+                    <textarea id="comment-input" rows="3" placeholder="Deixe seu comentário..."></textarea>
+                    <button id="post-comment-btn" class="action-button">Postar Comentário</button>
+                </div>
+                <div id="comment-list"></div>
+            </div>
         </div>
+    </div>
+    <div id="sidebar-column">
+        <!-- Sidebar para vídeos recomendados, etc. -->
     </div>
 </div>
 <script src="database.js"></script>
