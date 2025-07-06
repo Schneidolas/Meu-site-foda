@@ -269,3 +269,45 @@ videoPlayer.addEventListener('timeupdate', () => {
     const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
     timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(videoPlayer.duration)}`;
 });
+
+// --- LÓGICA DO BOTÃO SHARE ---
+const shareBtn = document.querySelector('#action-bar .action-button'); // Assume que o "Share" é o primeiro botão
+const shareModal = document.getElementById('share-modal');
+const closeModalBtn = document.querySelector('.modal-close-btn');
+const shareLinkInput = document.getElementById('share-link-input');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+
+// Abre a janela modal
+shareBtn.addEventListener('click', () => {
+    // Pega a URL atual, mas usa a URL do site pai (Neocities)
+    const videoUrl = window.top.location.href;
+    shareLinkInput.value = videoUrl;
+    shareModal.style.display = 'flex';
+});
+
+// Fecha a janela modal
+const closeModal = () => {
+    shareModal.style.display = 'none';
+};
+
+closeModalBtn.addEventListener('click', closeModal);
+shareModal.addEventListener('click', (e) => {
+    // Fecha se clicar no fundo escuro, mas não se clicar no conteúdo
+    if (e.target === shareModal) {
+        closeModal();
+    }
+});
+
+// Copia o link para a área de transferência
+copyLinkBtn.addEventListener('click', () => {
+    shareLinkInput.select();
+    try {
+        document.execCommand('copy');
+        copyLinkBtn.textContent = 'Copiado!';
+        setTimeout(() => {
+            copyLinkBtn.textContent = 'Copiar';
+        }, 1500); // Volta ao normal depois de 1.5s
+    } catch (err) {
+        alert('Não foi possível copiar o link.');
+    }
+});
