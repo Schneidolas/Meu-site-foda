@@ -48,7 +48,7 @@ const youtubo_db = {
             subscribers: 28345,
             style: {
                 fontFamily: "'Tahoma', 'Verdana', sans-serif",
-                pageBg: "url('https://i.imgur.com/vXDWqIHg.jpg')", // Fundo da página
+                pageBg: "url('https://i.imgur.com/lNPYkaq.gif')", // Fundo da página
                 windowColor: "#241010", // Cor das janelas
                 textColor: "#dad7d7",
                 borderColor: "#3a0000",
