@@ -32,25 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSubButton();
 
     const style = channelData.style;
-    iconst style = channelData.style;
     if (style) {
-        let customCSS = `
+        document.getElementById('custom-channel-styles').innerHTML = `
             body { background: ${style.pageBg}; font-family: ${style.fontFamily}; }
-            .module {
-                background-color: ${style.windowColor};
-                border-color: ${style.borderColor};
-                color: ${style.textColor};
-                
-                /* CORREÇÃO AQUI: background-size: cover; para esticar a imagem */
-                ${style.windowBgImage ? `background-image: url('${style.windowBgImage}'); background-size: cover; background-repeat: no-repeat;` : ''}
-                
-                ${style.windowShadow ? 'box-shadow: 0 4px 10px rgba(0,0,0,0.15);' : ''}
-            }
-            .module a, .module-header h3, #videos-header { color: ${style.linkColor}; }
-            
-            /* (Estilo de brilho windowGloss continua igual) */
-        `;
-        document.getElementById('custom-channel-styles').innerHTML = customCSS;
+            .module { background-color: ${style.windowColor}; border-color: ${style.borderColor}; color: ${style.textColor};
+                ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
+                ${style.windowShadow ? 'box-shadow: 0 4px 10px rgba(0,0,0,0.15);' : ''} }
+            .module a, .module-header h3 { color: ${style.linkColor}; }
+            ${style.windowGloss ? `.module::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+                background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0)); pointer-events: none;
+                border-radius: 8px 8px 0 0; z-index: 1;}` : ''}`;
     }
 
     const videoGrid = document.getElementById('video-grid');
