@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. ELEMENTOS DO DOM ---
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('v');
+    const videoData = youtubo_db.videos[videoId];
+
+    if (!videoData) { return; }
+
+    // --- ELEMENTOS DO DOM ---
     const videoContainer = document.getElementById('video-container-2007');
     const videoPlayer = document.getElementById('video-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
@@ -8,16 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeDisplay = document.getElementById('time-display');
     const progressBar = document.getElementById('progress-bar');
     const progressFilled = document.getElementById('progress-filled');
+    const qualityBtn = document.getElementById('quality-btn');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-    // --- 2. CARREGAR DADOS DO VÍDEO ---
-    const params = new URLSearchParams(window.location.search);
-    const videoId = params.get('v');
-    const videoData = youtubo_db.videos[videoId];
-    if (!videoData) return;
-
-    // --- 3. INICIALIZAR PLAYER E INFORMAÇÕES DA PÁGINA (CORRIGIDO) ---
-    videoPlayer.src = videoData.url; // Carrega a URL simples
+    
+    // --- INICIALIZAR PLAYER ---
+    videoPlayer.src = videoData.url;
     document.title = `${videoData.title} - YouTubo`;
     document.getElementById('video-title').textContent = videoData.title;
     document.getElementById('video-description').textContent = videoData.description;
@@ -25,16 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.textContent = videoData.channelId;
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
-    // --- 4. LÓGICA FUNCIONAL DOS CONTROLES ---
-
-    // PLAY / PAUSA
+    // --- LÓGICA DO PLAYER (PLAY, PAUSE, PROGRESSO) ---
     const togglePlay = () => { videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause(); };
     videoPlayer.addEventListener('play', () => { playPauseBtn.textContent = '❚❚'; });
     videoPlayer.addEventListener('pause', () => { playPauseBtn.textContent = '▶'; });
     playPauseBtn.addEventListener('click', togglePlay);
     videoPlayer.addEventListener('click', togglePlay);
 
-    // BARRA DE PROGRESSO E TEMPO
     videoPlayer.addEventListener('timeupdate', () => {
         progressFilled.style.width = `${(videoPlayer.currentTime / videoPlayer.duration) * 100}%`;
         const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -44,26 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
         videoPlayer.currentTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
     });
 
-    // CONTROLE DE VOLUME
+    // --- 5. LÓGICA PARA NOVOS CONTROLES ---
+    // VOLUME
     const handleVolume = () => {
         videoPlayer.volume = volumeSlider.value;
-        videoPlayer.muted = volumeSlider.value == 0;
-        if (videoPlayer.muted) volumeBtn.textContent = '🔇';
-        else if (volumeSlider.value > 0.5) volumeBtn.textContent = '🔊';
-        else volumeBtn.textContent = '🔉';
+        if (videoPlayer.volume > 0.5) volumeBtn.textContent = '🔊';
+        else if (videoPlayer.volume > 0) volumeBtn.textContent = '🔉';
+        else volumeBtn.textContent = '🔇';
     };
     volumeBtn.addEventListener('click', () => {
         videoPlayer.muted = !videoPlayer.muted;
-        volumeSlider.value = videoPlayer.muted ? 0 : videoPlayer.volume;
-        handleVolume();
+        volumeBtn.textContent = videoPlayer.muted ? '🔇' : '🔊';
     });
     volumeSlider.addEventListener('input', handleVolume);
-    handleVolume();
+
+    // QUALIDADE (COSMÉTICO)
+    qualityBtn.addEventListener('click', () => {
+        const isActive = qualityBtn.classList.toggle('active');
+        qualityBtn.textContent = isActive ? 'HD' : 'SD';
+        videoPlayer.classList.toggle('video-player-hd', isActive);
+    });
 
     // TELA CHEIA
     fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
-            videoContainer.requestFullscreen();
+            videoContainer.requestFullscreen().catch(err => alert(`Erro: ${err.message}`));
         } else {
             document.exitFullscreen();
         }
