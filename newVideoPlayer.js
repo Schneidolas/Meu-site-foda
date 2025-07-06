@@ -243,29 +243,35 @@ const videoAnnotations = annotations_db[videoId] || [];
 
 videoPlayer.addEventListener('timeupdate', () => {
     const currentTime = videoPlayer.currentTime;
+
+    // --- LÓGICA DAS ANOTAÇÕES (CORRIGIDA) ---
     videoAnnotations.forEach((ann, index) => {
         const annId = `annotation-${index}`;
         const existingAnn = document.getElementById(annId);
 
-        // Mostra a anotação se estiver no tempo certo e não existir
-        if (currentTime >= ann.startTime && currentTime <= ann.endTime) {
-            if (!existingAnn) {
-                const annEl = document.createElement('div');
-                annEl.id = annId;
-                annEl.className = 'annotation-box';
-                annEl.style.top = ann.top;
-                annEl.style.left = ann.left;
-                annEl.innerHTML = `${ann.text}<div class="annotation-close-btn">x</div>`;
-                annotationsLayer.appendChild(annEl);
-                annEl.querySelector('.annotation-close-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    annEl.remove();
-                });
-            }
-        } else { // Remove a anotação se o tempo já passou
-            if (existingAnn) {
-                existingAnn.remove();
-            }
+        // Condição para mostrar a anotação
+        const shouldBeVisible = currentTime >= ann.startTime && currentTime <= ann.endTime;
+
+        if (shouldBeVisible && !existingAnn) {
+            // Cria a anotação se ela deve estar visível e não existe
+            const annEl = document.createElement('div');
+            annEl.id = annId;
+            annEl.className = 'annotation-box';
+            annEl.style.top = ann.top;
+            annEl.style.left = ann.left;
+            annEl.innerHTML = `${ann.text}<div class="annotation-close-btn">x</div>`;
+            annotationsLayer.appendChild(annEl);
+            annEl.querySelector('.annotation-close-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                annEl.remove();
+            });
+        } else if (!shouldBeVisible && existingAnn) {
+            // Remove a anotação se ela não deve estar visível e existe
+            existingAnn.remove();
         }
     });
+
+    progressFilled.style.width = `${(currentTime / videoPlayer.duration) * 100}%`;
+    const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+    timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(videoPlayer.duration)}`;
 });
