@@ -5,7 +5,7 @@ const youtubo_db = {
     videos: {
         'gmod': {
             id: 'gmod',
-            title: "Review de Garry's Mod",
+            title: "review de garry's mod",
             // !!! URL CORRIGIDA !!! - GitHub não funciona para streaming de vídeo direto. Use um host como o Internet Archive.
             url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/review%20de%20garrys%20mod.mp4',
             thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4000/ss_c13ffded1d71bedfa7ede94c11cbd21fbd21a32c.1920x1080.jpg?t=1736937068',
@@ -14,8 +14,8 @@ const youtubo_db = {
         },
         'cscz': {
             id: 'cscz',
-            title: 'Counter-Strike: Condition Zero - Missão Secreta',
-            url: 'https://archive.org/download/cscz-deleted-scenes-mission-7-fastline/CSCZ%20Deleted%20Scenes%20Mission%207%20Fastline.mp4',
+            title: 'counter strike condition zero',
+            url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/counter%20strike%20condition%20zero.mp4',
             thumbnail: 'https://i.imgur.com/N74hY4h.png',
             description: 'Jogando uma das melhores missões do CS:CZ. Pura nostalgia!',
             channelId: 'Schneidola$'
