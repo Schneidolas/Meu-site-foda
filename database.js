@@ -7,9 +7,7 @@ const youtubo_db = {
             id: 'gmod',
             title: "Review de Garry's Mod",
             // !!! URL CORRIGIDA !!! - GitHub não funciona para streaming de vídeo direto. Use um host como o Internet Archive.
-            url: {
-                HD: 'https://github.com/Schneidolas/music/raw/refs/heads/main/review%20de%20garrys%20mod.mp4',
-            },
+            url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/review%20de%20garrys%20mod.mp4',
             thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4000/ss_c13ffded1d71bedfa7ede94c11cbd21fbd21a32c.1920x1080.jpg?t=1736937068',
             description: 'Gameplay nostálgica de GMod, um clássico da Steam!',
             channelId: 'Schneidola$'
