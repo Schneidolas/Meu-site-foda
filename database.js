@@ -23,9 +23,9 @@ const youtubo_db = {
         'gmodZoeira': {
             id: 'gmodZoeira',
             title: 'A fúria de Manoel gomes! - gmod',
-            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/A%20F%C3%BAria%20de%20Manoel%20Gomes%20-%20Garry's%20Mod.mp3",
+            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/a%20furia%20gmod.mp4",
             thumbnail: 'https://i.imgur.com/b9Jc8zI.png',
-            description: 'O hit do verão da Fenda do Biquini. Um clássico do rock cantado pelo Bob Esponja.',
+            description: 'o manoel gomes vai te pegar de noite se vc nn se inscrever ashuashuashaushausha',
             channelId: 'M@ast3rB4nan@'
         },
         'cat_fail': {
