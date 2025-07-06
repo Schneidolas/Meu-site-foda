@@ -75,3 +75,18 @@ a:hover {
     border: 2px solid black;
     text-align: left;
 }
+
+/* newVideoPlayer.css */
+#page-content {
+    display: flex;
+    gap: 20px;
+    width: 970px;
+    margin: 20px auto;
+}
+#main-column {
+    flex: 1; /* Ocupa o espaço disponível */
+}
+#sidebar-column {
+    width: 300px; /* Largura fixa */
+    flex-shrink: 0; /* Não encolhe */
+}
