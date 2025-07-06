@@ -1,25 +1,28 @@
-// common.js - O nosso "espião" que avisa o Neocities
+// common.js - Versão 2.0
 
 function updateParentHash() {
-    // Só executa se o site estiver dentro de um iframe
+    // Só roda se estiver dentro de um iframe
     if (window.self !== window.top) {
         try {
-            // Pega o caminho relativo da página atual (ex: "videoPlayer.html?v=gmod")
-            const relativePath = window.location.pathname.split('/').pop() + window.location.search;
-            
-            // Cria o novo hash que será colocado na URL do Neocities
+            // Pega o nome do arquivo atual e os parâmetros da URL
+            const pageName = window.location.pathname.split('/').pop();
+            const searchParams = window.location.search;
+            const relativePath = pageName + searchParams;
+
+            // O novo hash a ser definido na URL pai (Neocities)
             const newHash = '#' + relativePath;
 
-            // Atualiza a URL do site "pai" (Neocities) sem recarregar a página
+            // Atualiza o hash da janela pai (Neocities)
+            // Usamos replaceState para garantir que a mudança seja registrada
             if (window.top.location.hash !== newHash) {
-                window.top.location.hash = newHash;
+                 window.top.history.replaceState(null, null, ' ' + newHash); // O espaço é um truque para forçar a atualização em alguns navegadores
             }
+
         } catch (e) {
-            // Ignora erros de segurança que podem acontecer em alguns navegadores
-            console.error("Não foi possível acessar a janela pai:", e);
+            console.error("Erro ao tentar atualizar a URL pai:", e);
         }
     }
 }
 
-// Executa a função assim que a página terminar de carregar
+// Roda assim que o DOM carregar
 document.addEventListener('DOMContentLoaded', updateParentHash);
