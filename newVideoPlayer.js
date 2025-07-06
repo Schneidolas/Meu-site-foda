@@ -225,3 +225,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     loadComments();
 });
+
+// --- LÓGICA PARA ANOTAÇÕES ---
+const annotationsLayer = document.getElementById('annotations-layer');
+
+// Mini banco de dados de anotações (você pode mover para o database.js se preferir)
+const annotations_db = {
+    'gmod': [
+        { text: 'se inscreva no canal!', startTime: 5, endTime: 10, top: '10%', left: '70%' },
+        { text: 'kkkkkkkkkkkk', startTime: 25, endTime: 28, top: '80%', left: '40%' }
+    ],
+    'cscz': [
+        { text: 'LIKE NO VÍDEO', startTime: 2, endTime: 7, top: '5%', left: '5%' }
+    ]
+};
+
+const videoAnnotations = annotations_db[videoId] || [];
+
+videoPlayer.addEventListener('timeupdate', () => {
+    const currentTime = videoPlayer.currentTime;
+    videoAnnotations.forEach((ann, index) => {
+        const annId = `annotation-${index}`;
+        const existingAnn = document.getElementById(annId);
+
+        // Mostra a anotação se estiver no tempo certo e não existir
+        if (currentTime >= ann.startTime && currentTime <= ann.endTime) {
+            if (!existingAnn) {
+                const annEl = document.createElement('div');
+                annEl.id = annId;
+                annEl.className = 'annotation-box';
+                annEl.style.top = ann.top;
+                annEl.style.left = ann.left;
+                annEl.innerHTML = `${ann.text}<div class="annotation-close-btn">x</div>`;
+                annotationsLayer.appendChild(annEl);
+                annEl.querySelector('.annotation-close-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    annEl.remove();
+                });
+            }
+        } else { // Remove a anotação se o tempo já passou
+            if (existingAnn) {
+                existingAnn.remove();
+            }
+        }
+    });
+});
