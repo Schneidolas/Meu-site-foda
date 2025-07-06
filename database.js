@@ -48,13 +48,13 @@ const youtubo_db = {
             subscribers: 28345,
             style: {
                 fontFamily: "'Tahoma', 'Verdana', sans-serif",
-                pageBg: "#000000", // Fundo da página
+                pageBg: "url('https://i.imgur.com/vXDWqIHg.jpg')", // Fundo da página
                 windowColor: "#FFFFFF", // Cor das janelas
                 textColor: "#000000",
                 borderColor: "#cccccc",
                 linkColor: '#0055aa',
-                windowShadow: true, // A janela tem sombra?
-                windowGloss: true, // A janela tem brilho?
+                windowShadow: false, // A janela tem sombra?
+                windowGloss: false, // A janela tem brilho?
                 windowBgImage: "", // URL para imagem de fundo da janela (deixar em branco se não usar)
             }
         },
