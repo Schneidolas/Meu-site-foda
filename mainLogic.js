@@ -28,9 +28,45 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.values(youtubo_db.channels).forEach(channel => {
                 const item = document.createElement('div');
                 item.className = 'channel-item';
-                item.innerHTML = `<img src="${channel.profilePic}" class="channel-pic"><div class="channel-info"><h4>${channel.name}</h4><span>${channel.subscribers.toLocaleString()} subscribers</span></div><button class="subscribe-btn">Subscribe</button>`;
+                // Adicionamos um ID único ao botão para poder controlá-lo
+                item.innerHTML = `
+                    <img src="${channel.profilePic}" class="channel-pic">
+                    <div class="channel-info">
+                        <h4><a href="userPage.html?id=${channel.name}">${channel.name}</a></h4>
+                        <span>${channel.subscribers.toLocaleString()} subscribers</span>
+                    </div>
+                    <button class="subscribe-btn" data-channel-id="${channel.name}">Subscribe</button>
+                `;
                 channelList.appendChild(item);
             });
+
+            // Lógica para atualizar e controlar TODOS os botões de inscrição na página
+            channelList.querySelectorAll('.subscribe-btn').forEach(btn => {
+                const channelId = btn.dataset.channelId;
+                const subKey = `youtubo_subscribed_${channelId}`;
+
+                const updateBtnState = () => {
+                    if (localStorage.getItem(subKey) === 'true') {
+                        btn.textContent = 'Subscribed';
+                        btn.classList.add('subscribed'); // Adiciona uma classe para estilização, se necessário
+                    } else {
+                        btn.textContent = 'Subscribe';
+                        btn.classList.remove('subscribed');
+                    }
+                };
+
+                btn.addEventListener('click', () => {
+                    if (localStorage.getItem(subKey) === 'true') {
+                        localStorage.removeItem(subKey);
+                    } else {
+                        localStorage.setItem(subKey, 'true');
+                    }
+                    updateBtnState();
+                });
+
+                updateBtnState(); // Define o estado inicial do botão
+            });
+
             dynamicContent.innerHTML = '';
             dynamicContent.appendChild(template);
         },
@@ -69,7 +105,28 @@ document.addEventListener('DOMContentLoaded', () => {
             dynamicContent.innerHTML = '';
             dynamicContent.appendChild(template);
         },
-        search: (query) => { /* ... (implementação futura) ... */ },
+        search: (query) => {
+        const template = document.getElementById('template-search').content.cloneNode(true);
+        const title = template.getElementById('search-results-title');
+        const grid = template.getElementById('search-video-grid');
+        
+        title.textContent = `Search Results for "${query}"`;
+        
+        const results = Object.values(youtubo_db.videos).filter(video => 
+            video.title.toLowerCase().includes(query.toLowerCase()) ||
+            video.description.toLowerCase().includes(query.toLowerCase())
+        );
+
+        grid.innerHTML = '';
+        if (results.length > 0) {
+            results.forEach(video => renderVideoItem(video, grid, 'list')); // Reutiliza nossa função de renderizar vídeos
+        } else {
+            grid.innerHTML = `<p>No videos found matching your search term.</p>`;
+        }
+
+        dynamicContent.innerHTML = '';
+        dynamicContent.appendChild(template);
+    },
         profile: () => {
             if (!currentUser) { renderers.home(); return; }
             const template = document.getElementById('template-profile').content.cloneNode(true);
