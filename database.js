@@ -61,12 +61,12 @@ const youtubo_db = {
         },
         'M@ast3rB4nan@': {
             name: 'M@ast3rB4nan@',
-            profilePic: 'https://i.imgur.com/sZ4zL8A.png',
-            banner: 'https://i.imgur.com/kY7aJ9T.jpeg',
-            bio: 'Relembrando os melhores momentos da TV e da internet antiga.',
+            profilePic: 'https://media.tenor.com/RQKAyM7ZHA0AAAAM/banana-dance.gif',
+            banner: 'https://i.pinimg.com/originals/48/16/33/481633f1184fed769ed4f7aef5d5ff36.gif',
+            bio: 'eu sou o Master Banana, seja bem vindo a um canal com muita zueiraa ashuashuahsuhauhauhauhauh >:]',
             subscribers: 125987,
             style: {
-                fontFamily: "'Courier New', monospace",
+                fontFamily: "'Comic Sans', Papyrus",
                 pageBg: "#222222",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
