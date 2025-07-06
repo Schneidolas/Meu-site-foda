@@ -50,13 +50,13 @@ const youtubo_db = {
                 fontFamily: "'Tahoma', 'Papyrus', sans-serif",
                 pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
                 windowColor: "#241010", // Cor das janelas
-                textColor: "#ffc1c1",
+                textColor: "#f7e9e9",
                 borderColor: "#3a0000",
                 linkColor: '#b20303',
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
-                playerBarBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')",
+                playerBarBg: "url('https://img1.picmix.com/output/stamp/normal/8/5/7/6/1186758_a9855.gif')",
             }
         },
         'CanalNostalgia': {
