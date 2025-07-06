@@ -16,7 +16,7 @@ const youtubo_db = {
             id: 'cscz',
             title: 'counter strike condition zero',
             url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/counter%20strike%20condition%20zero.mp4',
-            thumbnail: 'https://i.imgur.com/N74hY4h.png',
+            thumbnail: 'https://upload.wikimedia.org/wikipedia/pt/f/f3/Counter-Strike_Condition_Zero.jpg',
             description: 'Jogando uma das melhores missões do CS:CZ. Pura nostalgia!',
             channelId: 'Schneidola$'
         },
