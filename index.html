@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,24 +8,30 @@
 <body>
 
 <div id="header">
-    <a href="index.html"><img src="https://i.imgur.com/uNPA4yV.gif" alt="YouTubo Logo" id="logo"></a>
+    <a href="index.html"><img src="YouTubo.png" alt="YouTubo Logo" id="logo"></a>
     <form id="search-form">
         <input type="text" id="search-input" placeholder="Search">
         <button type="submit">Search Videos</button>
     </form>
     <div id="header-links">
-        <!-- O JS vai preencher isso -->
+        <!-- JS preenche aqui -->
     </div>
 </div>
 
 <div id="nav-bar">
-    <a href="index.html">Home</a>
-    <a href="videos.html">Videos</a>
-    <a href="channels.html">Channels</a>
-    <a href="community.html">Community</a>
+    <a href="#" data-page="home">Home</a>
+    <a href="#" data-page="videos">Videos</a>
+    <a href="#" data-page="channels">Channels</a>
+    <a href="#" data-page="community">Community</a>
 </div>
 
 <div id="page-container">
+    <!-- O CONTEÚDO DINÂMICO SERÁ INJETADO AQUI PELO JS -->
+    <div id="dynamic-content"></div>
+</div>
+
+<!-- TEMPLATES HTML (FICAM ESCONDIDOS) -->
+<template id="template-home">
     <div id="main-content">
         <div class="module">
             <div class="module-header"><h3>Featured Videos</h3></div>
@@ -34,20 +39,78 @@
         </div>
     </div>
     <div id="sidebar">
-        <div id="login-module" class="module">
-            <!-- O JS vai preencher o login/registro aqui -->
-        </div>
+        <div id="login-module" class="module"></div>
         <div class="module">
-             <div class="module-header"><h3>What's New</h3></div>
-             <div class="module-content">
-                 <p><strong><a href="#">YouTubo Mobile</a></strong><br>Now watch ALL YouTubo videos on your mobile device</p>
-             </div>
+            <div id="promo-box">
+                <h4>Can you dance?</h4>
+                <img src="https://i.imgur.com/R3SoYir.png" alt="Promo Image">
+                <p>Inspired by Matt Harding, YouTubo is proud to present our first monthly video contest.</p>
+                <a href="#">Join the contest now!</a>
+            </div>
         </div>
     </div>
-</div>
+</template>
+
+<template id="template-videos">
+    <div id="main-content-full">
+        <div class="module">
+            <div class="module-header"><h3>All Videos</h3></div>
+            <div id="video-grid-full" class="module-content"></div>
+        </div>
+    </div>
+</template>
+
+<template id="template-channels">
+    <div id="main-content-full">
+        <div class="module">
+            <div class="module-header"><h3>All Channels</h3></div>
+            <div id="channel-list" class="module-content"></div>
+        </div>
+    </div>
+</template>
+
+<template id="template-community">
+     <div id="main-content-full">
+        <div class="module">
+            <div class="module-header"><h3>Community Guestbook</h3></div>
+            <div class="module-content">
+                <div id="guestbook-posts"></div>
+                <hr class="dotted-hr">
+                <h4>Leave a message!</h4>
+                <form id="guestbook-form">
+                    <textarea id="guestbook-input" placeholder="Say hi to the community..."></textarea>
+                    <button type="submit">Post Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template-search">
+    <div id="main-content-full">
+        <div class="module">
+            <div class="module-header"><h3 id="search-results-title"></h3></div>
+            <div id="search-video-grid" class="module-content"></div>
+        </div>
+    </div>
+</template>
+
+<template id="template-profile">
+    <div id="main-content-full">
+        <div class="module">
+            <div class="module-header"><h3>My Profile</h3></div>
+            <div class="module-content">
+                <h2>Welcome, <span id="profile-username"></span>!</h2>
+                <p>Here you can see your liked videos, subscriptions, and more (feature coming soon!).</p>
+                <h4>My Comments:</h4>
+                <div id="my-comments-list"></div>
+            </div>
+        </div>
+    </div>
+</template>
 
 <script src="database.js"></script>
-<script src="mainLogic.js"></script> <!-- NOVO SCRIPT CENTRAL! -->
+<script src="mainLogic.js"></script>
 <script src="common.js"></script>
 </body>
 </html>
