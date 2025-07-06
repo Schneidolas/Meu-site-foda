@@ -116,3 +116,35 @@ a:hover { text-decoration: underline; }
     border: 1px solid #ccc;
     margin-bottom: 5px;
 }
+
+/* ESTILOS PARA AS NOVAS BORDAS */
+.module.border-flat { border-radius: 0; }
+.module.border-flat::before { border-radius: 0 !important; }
+.module.border-wobbly {
+    border-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 Q25,0 50,20 T100,20" stroke="black" stroke-width="3" fill="none" /></svg>') 10 stretch;
+    border-width: 5px;
+}
+
+/* ESTILOS PARA AS ABAS */
+.tabs-nav {
+    display: flex;
+    border-bottom: 1px solid #ccc; /* Será sobrescrito pela cor do canal */
+    margin: -15px -15px 15px -15px; /* Puxa para as bordas do content */
+    padding: 0 15px;
+}
+.tab-link {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: bold;
+    color: inherit;
+    opacity: 0.7;
+}
+.tab-link.active {
+    opacity: 1;
+    border-bottom: 3px solid; /* Usa a cor do link do canal */
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
