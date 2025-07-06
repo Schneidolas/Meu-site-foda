@@ -49,7 +49,7 @@ const youtubo_db = {
             style: {
                 fontFamily: "'Tahoma', 'Verdana', sans-serif",
                 pageBg: "url('https://i.imgur.com/vXDWqIHg.jpg')", // Fundo da página
-                windowColor: "#FFFFFF", // Cor das janelas
+                windowColor: "#000000", // Cor das janelas
                 textColor: "#000000",
                 borderColor: "#cccccc",
                 linkColor: '#0055aa',
