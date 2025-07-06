@@ -8,8 +8,26 @@
 </head>
 <body>
     <div id="content-wrapper">
-        <!-- TUDO AQUI SERÁ GERADO PELO JAVASCRIPT -->
+        <!-- Banner e Perfil agora são preenchidos, não criados -->
+        <div id="channel-banner" class="module"></div>
+        <div id="profile-box" class="module">
+             <img id="profile-pic" alt="Foto do Perfil">
+            <div class="profile-details">
+                <div class="profile-header">
+                    <h3 id="channel-name"></h3>
+                    <button id="subscribe-btn"></button>
+                </div>
+                <p id="channel-bio"></p>
+                <div id="channel-stats">
+                    <span id="sub-counter"></span> inscritos
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de conteúdo principal que será preenchida com abas ou seções -->
+        <div id="channel-content-area"></div>
     </div>
+
     <script src="database.js"></script>
     <script src="userPage.js"></script>
     <script src="common.js"></script>
