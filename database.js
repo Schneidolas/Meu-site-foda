@@ -50,12 +50,12 @@ const youtubo_db = {
                 fontFamily: "'Tahoma', 'Papyrus', sans-serif",
                 pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
                 windowColor: "#241010", // Cor das janelas
-                textColor: "#dad7d7",
+                textColor: "#ffc1c1",
                 borderColor: "#3a0000",
                 linkColor: '#b20303',
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
-                windowBgImage: "", // URL para imagem de fundo da janela (deixar em branco se não usar)
+                windowBgImage: "https://wallpapercave.com/wp/wp2647297.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
             }
         },
         'CanalNostalgia': {
