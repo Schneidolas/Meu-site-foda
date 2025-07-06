@@ -1,63 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Assistindo Vídeo - YouTubo</title>
-    <link rel="stylesheet" href="newVideoPlayer.css">
     <meta charset="UTF-8">
-    <style id="custom-channel-styles"></style>
+    <title>YouTubo - Player</title>
+    <style>
+        /* CSS BÁSICO E FUNCIONAL */
+        body {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            font-size: 14px;
+        }
+        #page-content {
+            width: 970px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+        }
+        #main-column { flex: 1; }
+        #sidebar-column { width: 320px; flex-shrink: 0; }
+        .module {
+            background-color: #282828;
+            border: 1px solid #444;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .module-header {
+            padding: 8px 12px;
+            border-bottom: 1px solid #444;
+            font-weight: bold;
+        }
+        .module-content { padding: 12px; }
+
+        /* PLAYER */
+        #video-container { background-color: #000; margin-bottom: 10px; }
+        #video-player { width: 100%; display: block; }
+        #video-title { font-size: 20px; margin: 0 0 15px 0; }
+
+        /* AÇÕES (Estrelas) */
+        #action-bar { padding: 5px 0; }
+        .star { font-size: 24px; cursor: pointer; color: #888; }
+        .star.active { color: #f9bf3b; }
+
+        /* DESCRIÇÃO E COMENTÁRIOS */
+        a { color: #3ea6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #121212;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #383838;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right;
+        }
+        button:hover { background-color: #4a4a4a; }
+        .comment-post { border-top: 1px solid #444; padding: 10px 0; }
+        .comment-post:first-child { border-top: none; }
+        .comment-user { font-weight: bold; }
+        .comment-time { font-size: 12px; color: #aaa; margin-left: 8px; }
+        .comment-text { margin-top: 5px; }
+
+        /* SIDEBAR */
+        .sidebar-item a { display: flex; gap: 10px; color: #fff; margin-bottom: 10px; }
+        .sidebar-thumb { width: 120px; height: 70px; object-fit: cover; }
+        .sidebar-title { font-weight: bold; }
+    </style>
 </head>
 <body>
-<div id="page-content">
-    <div id="main-column">
-        <h1 id="video-title">Carregando...</h1>
-        <div id="video-container-2007">
-            <video id="video-player"></video>
-            <div id="custom-controls">
-                <button id="play-pause-btn">▶</button>
-                <div id="progress-bar"><div id="progress-filled"></div></div>
-                <span id="time-display">00:00 / 00:00</span>
-                <button id="volume-btn">🔊</button>
-                <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="1">
-                <button id="fullscreen-btn">⛶</button>
-            </div>
-        </div>
-          </div>
-        <!-- Barra de ações com as estrelas -->
-        <div id="action-bar">
-            <div id="ratings-container" class="ratings">
-                <span class="star" data-value="1">☆</span>
-                <span class="star" data-value="2">☆</span>
-                <span class="star" data-value="3">☆</span>
-                <span class="star" data-value="4">☆</span>
-                <span class="star" data-value="5">☆</span>
-            </div>
-        </div>
-        <!-- Adicionada a classe 'module' para receber o estilo -->
-         <div id="video-description-box" class="module">
-            <p><strong>De: <a id="channel-link" href="#"></a></strong></p>
-            <p id="video-description"></p>
-        </div>
-        <div id="comments-module" class="module">
-            <div class="module-header"><h3>Comentários</h3></div>
-            <div class="module-content">
-                <div class="add-comment-box">
-                    <textarea id="comment-input" rows="3" placeholder="Deixe seu comentário..."></textarea>
-                    <button id="post-comment-btn" class="action-button">Postar Comentário</button>
-                </div>
-                <div id="comment-list"></div>
-            </div>
-        </div>
-    </div>
- <div id="sidebar-column" class="module">
-        <div class="module-header"><h3>Recomendados</h3></div>
-        <div id="sidebar-video-list" class="module-content">
-            <!-- Vídeos recomendados vão aqui -->
-        </div>
-    </div>
-</div>
 
-<script src="database.js"></script>
-<script src="newVideoPlayer.js"></script>
-<script src="common.js"></script>
+    <div id="page-content">
+        <div id="main-column">
+            <h1 id="video-title"></h1>
+            <div id="video-container">
+                <video id="video-player" controls></video> <!-- CONTROLES NATIVOS PARA GARANTIR FUNCIONAMENTO -->
+            </div>
+
+            <div id="action-bar">
+                <div id="ratings-container">
+                    <span class="star" data-value="1">☆</span>
+                    <span class="star" data-value="2">☆</span>
+                    <span class="star" data-value="3">☆</span>
+                    <span class="star" data-value="4">☆</span>
+                    <span class="star" data-value="5">☆</span>
+                </div>
+            </div>
+
+            <div id="description-box" class="module">
+                <div class="module-content">
+                    <p><strong>De: <a id="channel-link" href="#"></a></strong></p>
+                    <p id="video-description"></p>
+                </div>
+            </div>
+
+            <div id="comments-box" class="module">
+                <div class="module-header">Comentários</div>
+                <div class="module-content">
+                    <textarea id="comment-input" rows="3" placeholder="Deixe seu comentário..."></textarea>
+                    <button id="post-comment-btn">Postar</button>
+                    <div id="comment-list" style="clear: both; padding-top: 20px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sidebar-column">
+            <div id="sidebar-box" class="module">
+                <div class="module-header">Recomendados</div>
+                <div id="sidebar-video-list" class="module-content"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// JAVASCRIPT SIMPLES E DIRETO, SEM DEPENDÊNCIAS EXTERNAS
+
+// --- BANCO DE DADOS (TUDO EM UM LUGAR SÓ) ---
+const youtubo_db = {
+    videos: {
+        'gmod': {
+            id: 'gmod',
+            title: "Review de Garry's Mod",
+            url: 'https://github.com/Schneidolas/music/raw/refs/heads/main/review%20de%20garrys%20mod.mp4',
+            thumbnail: 'https://i.ytimg.com/vi/u3yII7yA88Q/hqdefault.jpg',
+            description: 'Gameplay nostálgica de GMod, um clássico da Steam!',
+            channelId: 'Schneidola$'
+        },
+        'cscz': {
+            id: 'cscz',
+            title: 'Counter-Strike: Condition Zero - Missão Secreta',
+            url: 'https://archive.org/download/cscz-deleted-scenes-mission-7-fastline/CSCZ%20Deleted%20Scenes%20Mission%207%20Fastline.mp4',
+            thumbnail: 'https://i.ytimg.com/vi/u3yII7yA88Q/hqdefault.jpg',
+            description: 'Jogando uma das melhores missões do CS:CZ. Pura nostalgia!',
+            channelId: 'Schneidola$'
+        }
+    },
+    channels: {
+        'Schneidola$': { name: 'Schneidola$' }
+    }
+};
+
+
+// --- CÓDIGO PRINCIPAL ---
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // --- 1. PEGAR O VÍDEO ATUAL ---
+        // Para testar, vamos carregar o vídeo 'gmod' por padrão.
+        // Depois, podemos voltar a usar a URL.
+        const videoId = 'gmod'; // Mude para 'cscz' para testar o outro vídeo.
+        const videoData = youtubo_db.videos[videoId];
+        
+        if (!videoData) throw new Error("Vídeo não encontrado no banco de dados.");
+
+        // --- 2. PREENCHER A PÁGINA COM AS INFORMAÇÕES ---
+        document.title = videoData.title;
+        document.getElementById('video-title').textContent = videoData.title;
+        document.getElementById('video-description').textContent = videoData.description;
+        
+        const channelLink = document.getElementById('channel-link');
+        channelLink.textContent = videoData.channelId;
+        // channelLink.href = `userPage.html?id=${videoData.channelId}`; // Desativado por enquanto
+
+        const videoPlayer = document.getElementById('video-player');
+        videoPlayer.src = videoData.url;
+
+        // --- 3. FUNCIONALIDADE DAS ESTRELAS (RATINGS) ---
+        const stars = document.querySelectorAll('.star');
+        const ratingKey = `rating_${videoId}`;
+
+        function setStars(ratingValue) {
+            stars.forEach(star => {
+                if (star.dataset.value <= ratingValue) {
+                    star.textContent = '★';
+                    star.classList.add('active');
+                } else {
+                    star.textContent = '☆';
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.dataset.value;
+                localStorage.setItem(ratingKey, value);
+                setStars(value);
+            });
+        });
+
+        // Carregar a nota salva
+        const savedRating = localStorage.getItem(ratingKey) || 0;
+        setStars(savedRating);
+
+        // --- 4. FUNCIONALIDADE DE COMENTÁRIOS ---
+        const commentInput = document.getElementById('comment-input');
+        const postBtn = document.getElementById('post-comment-btn');
+        const commentList = document.getElementById('comment-list');
+        const commentsKey = `comments_${videoId}`;
+
+        function renderComment(comment) {
+            const el = document.createElement('div');
+            el.className = 'comment-post';
+            el.innerHTML = `
+                <div class="comment-user">Visitante <span class="comment-time">${comment.time}</span></div>
+                <div class="comment-text">${comment.text}</div>
+            `;
+            commentList.prepend(el);
+        }
+
+        const savedComments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        savedComments.forEach(renderComment);
+
+        postBtn.addEventListener('click', () => {
+            const text = commentInput.value.trim();
+            if (!text) return;
+
+            const newComment = {
+                text: text,
+                time: new Date().toLocaleString('pt-BR')
+            };
+            
+            savedComments.push(newComment);
+            localStorage.setItem(commentsKey, JSON.stringify(savedComments));
+            renderComment(newComment);
+            commentInput.value = '';
+        });
+
+        // --- 5. PREENCHER A SIDEBAR ---
+        const sidebarList = document.getElementById('sidebar-video-list');
+        Object.values(youtubo_db.videos).forEach(vid => {
+            if (vid.id === videoId) return; // Não mostrar o vídeo atual
+            const el = document.createElement('div');
+            el.className = 'sidebar-item';
+            // Por enquanto, o link não faz nada, é só para visualização.
+            el.innerHTML = `
+                <a href="#"> 
+                    <img src="${vid.thumbnail}" class="sidebar-thumb">
+                    <span class="sidebar-title">${vid.title}</span>
+                </a>
+            `;
+            sidebarList.appendChild(el);
+        });
+
+    } catch (error) {
+        console.error("UM ERRO GRAVE ACONTECEU:", error);
+        document.body.innerHTML = `<h1>Deu ruim... Ocorreu um erro. Verifique o console (F12).</h1><p>${error.message}</p>`;
+    }
+});
+
+</script>
 </body>
 </html>
