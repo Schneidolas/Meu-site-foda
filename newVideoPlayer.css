@@ -1,7 +1,7 @@
 /* newVideoPlayer.css - VERSÃO FINAL COM CONTROLES COMPLETOS */
 
 body { font-family: 'Tahoma', 'Verdana', sans-serif; background-color: #f1f1f1; margin: 0; font-size: 13px; }
-#page-content { display: flex; width: 970px; margin: 20px auto; gap: 20px; }
+#page-content { display: flex; width: 970px; margin: 20px auto; gap: 20px; align-items: flex-start; }
 #main-column { flex: 2; }
 #sidebar-column { flex: 1; }
 h1 { font-size: 18px; margin-top: 0; }
