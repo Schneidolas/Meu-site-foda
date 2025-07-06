@@ -215,7 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
     postBtn.addEventListener('click', () => {
         const text = commentInput.value.trim();
         if (!text) return;
-        const newComment = { user: 'Visitante', text: text, time: 'agora' };
+        const username = localStorage.getItem('youtubo_user') || 'Visitante';
+        const newComment = { user: username, text: text, time: 'agora' };
         const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
         comments.push(newComment);
         localStorage.setItem(commentsKey, JSON.stringify(comments));
