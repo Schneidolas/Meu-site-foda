@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,88 +9,45 @@
 <body>
 
 <div id="header">
-    <a href="index.html"><img src="YouTubo.png" alt="YouTubo Logo" id="logo"></a>
-    <div id="search-bar">
-        <input type="text" placeholder="Search">
-        <button>Search Videos</button>
-    </div>
+    <a href="index.html"><img src="https://i.imgur.com/uNPA4yV.gif" alt="YouTubo Logo" id="logo"></a>
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search">
+        <button type="submit">Search Videos</button>
+    </form>
     <div id="header-links">
-        <a href="#">Sign Up</a> | <a href="#">Log In</a> | <a href="#">Help</a>
+        <!-- O JS vai preencher isso -->
     </div>
 </div>
 
 <div id="nav-bar">
-    <a href="#">Home</a>
-    <a href="#">Videos</a>
-    <a href="#">Channels</a>
-    <a href="#">Community</a>
+    <a href="index.html">Home</a>
+    <a href="videos.html">Videos</a>
+    <a href="channels.html">Channels</a>
+    <a href="community.html">Community</a>
 </div>
 
 <div id="page-container">
     <div id="main-content">
         <div class="module">
-            <div class="module-header">
-                <h3>Featured Videos</h3>
-            </div>
-            <div id="video-grid" class="module-content">
-                <!-- Vídeos serão inseridos aqui pelo JS -->
-            </div>
+            <div class="module-header"><h3>Featured Videos</h3></div>
+            <div id="video-grid" class="module-content"></div>
         </div>
     </div>
-
     <div id="sidebar">
-        <div class="module">
-            <div id="promo-box">
-                <h4>Can you dance?</h4>
-                <img src="https://i.imgur.com/R3SoYir.png" alt="Promo Image">
-                <p>Inspired by Matt Harding, YouTubo is proud to present our first monthly video contest.</p>
-                <a href="#">Join the contest now!</a>
-            </div>
-        </div>
-        <div class="module">
-            <div class="module-header"><h3>Member Login</h3></div>
-            <div class="module-content">
-                <form id="login-form">
-                    <label>User Name:</label>
-                    <input type="text" id="username">
-                    <label>Password:</label>
-                    <input type="password" id="password">
-                    <button type="submit">Login</button>
-                    <a href="#" id="signup-link">Sign Up!</a>
-                </form>
-            </div>
+        <div id="login-module" class="module">
+            <!-- O JS vai preencher o login/registro aqui -->
         </div>
         <div class="module">
              <div class="module-header"><h3>What's New</h3></div>
              <div class="module-content">
                  <p><strong><a href="#">YouTubo Mobile</a></strong><br>Now watch ALL YouTubo videos on your mobile device</p>
-                 <p><strong><a href="#">Warp!</a></strong><br>Visually fly through YouTubo videos in the Fullscreen player</p>
              </div>
         </div>
     </div>
 </div>
 
 <script src="database.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Popula a grade de vídeos
-    const videoGrid = document.getElementById('video-grid');
-    Object.values(youtubo_db.videos).forEach(video => {
-        const videoElement = document.createElement('div');
-        videoElement.className = 'video-item';
-        videoElement.innerHTML = `
-            <a href="videoPlayer.html?v=${video.id}">
-                <img src="${video.thumbnail}" class="thumbnail" alt="${video.title}">
-            </a>
-            <div class="video-info">
-                <a href="videoPlayer.html?v=${video.id}" class="video-title">${video.title}</a>
-                <span class="video-channel">From: <a href="userPage.html?id=${video.channelId}">${video.channelId}</a></span>
-            </div>
-        `;
-        videoGrid.appendChild(videoElement);
-    });
-});
-</script>
+<script src="mainLogic.js"></script> <!-- NOVO SCRIPT CENTRAL! -->
 <script src="common.js"></script>
 </body>
 </html>
