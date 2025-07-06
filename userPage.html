@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canal - YouTubo</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="userPage.css">
+    <!-- Estilos dinâmicos do canal serão injetados aqui -->
+    <style id="custom-channel-styles"></style>
+</head>
+<body>
+
+<div id="content-wrapper">
+    <!-- 1. BANNER -->
+    <div id="channel-banner" class="module">
+        <!-- O banner será inserido aqui pelo JS -->
+    </div>
+
+    <!-- 2. INFORMAÇÕES DO CANAL -->
+    <div id="profile-box" class="module">
+        <img id="profile-pic" alt="Foto do Perfil">
+        <div class="profile-details">
+            <!-- Coluna de texto e botão -->
+            <div class="profile-header">
+                <h3 id="channel-name">Carregando...</h3>
+                <button id="subscribe-btn">Subscribe</button>
+            </div>
+            <p id="channel-bio"></p>
+            <div id="channel-stats">
+                <span id="sub-counter">--</span> inscritos
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. VÍDEOS DO CANAL (AGORA EMBAIXO) -->
+    <div class="module">
+         <div class="module-header"><h3>Vídeos do Canal</h3></div>
+         <div id="video-grid" class="module-content">
+             <!-- A grade de vídeos será inserida aqui -->
+         </div>
+    </div>
+</div>
+
+<script src="database.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. CARREGAR DADOS DO CANAL ---
+    const params = new URLSearchParams(window.location.search);
+    const channelId = params.get('id');
+    const channelData = youtubo_db.channels[channelId];
+
+    if (!channelData) {
+        document.body.innerHTML = `<h1>Canal "${channelId}" não encontrado.</h1><a href="MainPage.html">Voltar para a home</a>`;
+        return;
+    }
+
+    // --- 2. PREENCHER CONTEÚDO DA PÁGINA ---
+    document.title = `Canal de ${channelData.name}`;
+    document.getElementById('channel-banner').innerHTML = `<img src="${channelData.banner}" alt="Banner do Canal">`;
+    document.getElementById('profile-pic').src = channelData.profilePic;
+    document.getElementById('channel-name').textContent = channelData.name;
+    document.getElementById('channel-bio').textContent = channelData.bio;
+    document.getElementById('sub-counter').textContent = channelData.subscribers.toLocaleString('pt-BR');
+
+    // --- 3. LÓGICA DO BOTÃO DE INSCRIÇÃO (CORRIGIDA) ---
+    const subBtn = document.getElementById('subscribe-btn');
+    const subKey = `youtubo_subscribed_${channelId}`; // Chave única por canal!
+
+    const updateSubButton = () => {
+        if (localStorage.getItem(subKey) === 'true') {
+            subBtn.classList.add('subscribed');
+            subBtn.textContent = 'Subscribed';
+        } else {
+            subBtn.classList.remove('subscribed');
+            subBtn.textContent = 'Subscribe';
+        }
+    };
+
+    subBtn.addEventListener('click', () => {
+        if (localStorage.getItem(subKey) === 'true') {
+            localStorage.removeItem(subKey);
+        } else {
+            localStorage.setItem(subKey, 'true');
+        }
+        updateSubButton(); // Atualiza a aparência do botão
+    });
+    
+    updateSubButton(); // Checa o estado inicial ao carregar a página
+
+    // --- 4. APLICAR ESTILOS CUSTOMIZADOS DO CANAL (COMPLETO) ---
+    const style = channelData.style;
+    if (style) {
+        let customCSS = `
+            body {
+                background: ${style.pageBg || '#e1e1e1'};
+                font-family: ${style.fontFamily || "'Tahoma', sans-serif"};
+            }
+            .module {
+                background-color: ${style.windowColor || '#fff'};
+                border: 1px solid ${style.borderColor || '#ccc'};
+                color: ${style.textColor || '#000'};
+                ${style.windowBgImage ? `background-image: url('${style.windowBgImage}'); background-size: cover;` : ''}
+                ${style.windowShadow ? 'box-shadow: 0 4px 10px rgba(0,0,0,0.15);' : ''}
+            }
+            .module a, .module-header h3 {
+                color: ${style.linkColor || '#0055aa'};
+            }
+            ${style.windowGloss ? `.module::before {
+                content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+                background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0));
+                pointer-events: none; border-radius: 8px 8px 0 0; z-index: 1;
+            }` : ''}
+        `;
+        document.getElementById('custom-channel-styles').innerHTML = customCSS;
+    }
+
+    // --- 5. PREENCHER GRADE DE VÍDEOS (CORRIGIDO) ---
+    const videoGrid = document.getElementById('video-grid');
+    videoGrid.innerHTML = '';
+    let hasVideos = false;
+    Object.values(youtubo_db.videos).forEach(video => {
+        if (video.channelId === channelId) {
+            hasVideos = true;
+            const videoElement = document.createElement('div');
+            videoElement.className = 'video-item';
+            videoElement.innerHTML = `
+                <a href="videoPlayer.html?v=${video.id}">
+                    <img src="${video.thumbnail}" class="thumbnail" alt="${video.title}">
+                    <br>
+                    <b>${video.title}</b>
+                </a>`;
+            videoGrid.appendChild(videoElement);
+        }
+    });
+
+    if (!hasVideos) {
+        videoGrid.innerHTML = '<p>Este canal ainda não postou vídeos.</p>';
+    }
+});
+</script>
+
+</body>
+</html>

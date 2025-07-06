@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assistindo Vídeo - YouTubo</title>
+    <link rel="stylesheet" href="newVideoPlayer.css">
+    <meta charset="UTF-8">
+    <!-- Estilos dinâmicos do canal do vídeo serão injetados aqui -->
+    <style id="custom-channel-styles"></style>
+</head>
+<body>
+
+<div id="page-content">
+    <div id="main-column">
+        <h1 id="video-title">Carregando vídeo...</h1>
+        <div id="video-container-2007">
+            <video id="video-player"></video>
+            <div id="custom-controls">
+                <button id="play-pause-btn">▶</button>
+                <div id="progress-bar"><div id="progress-filled"></div></div>
+                <span id="time-display">00:00 / 00:00</span>
+                <button id="volume-btn">🔊</button>
+                <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="1">
+                <button id="fullscreen-btn">⛶</button>
+            </div>
+        </div>
+        <div id="action-bar">
+            <div id="ratings-container" class="ratings">
+                <span class="star" data-value="1">☆</span><span class="star" data-value="2">☆</span><span class="star" data-value="3">☆</span><span class="star" data-value="4">☆</span><span class="star" data-value="5">☆</span>
+            </div>
+        </div>
+        <!-- Adicionada a classe 'module' para receber o estilo -->
+        <div id="video-description-box" class="module">
+            <p><strong>De: <a id="channel-link" href="#"></a></strong></p>
+            <p id="video-description"></p>
+        </div>
+        <!-- Adicionada a classe 'module' para receber o estilo -->
+        <div id="comments-module" class="module">
+            <div class="module-header"><h3>Comentários</h3></div>
+            <div class="module-content">
+                <div class="add-comment-box">
+                    <textarea id="comment-input" rows="3" placeholder="Deixe seu comentário..."></textarea>
+                    <button id="post-comment-btn" class="action-button">Postar Comentário</button>
+                </div>
+                <div id="comment-list"></div>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar-column">
+        <!-- Sidebar content... -->
+    </div>
+</div>
+
+<script src="database.js"></script>
+<script src="newVideoPlayer.js"></script>
+</body>
+</html>
