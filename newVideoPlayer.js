@@ -1,27 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. DEFINIÇÃO DE TODOS OS ELEMENTOS DO DOM ---
-    const videoContainer = document.getElementById('video-container-2007');
-    const videoPlayer = document.getElementById('video-player');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const volumeBtn = document.getElementById('volume-btn');
-    const volumeSlider = document.getElementById('volume-slider');
-    const timeDisplay = document.getElementById('time-display');
-    const progressBar = document.getElementById('progress-bar');
-    const progressFilled = document.getElementById('progress-filled');
-    const qualityBtn = document.getElementById('quality-btn');
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-    const stars = document.querySelectorAll('#ratings-container .star');
-    const commentInput = document.getElementById('comment-input');
-    const postBtn = document.getElementById('post-comment-btn');
-    const commentList = document.getElementById('comment-list');
-
-    // --- 2. CARREGAR DADOS DO VÍDEO ---
+    // --- 1. CARREGAR DADOS DO VÍDEO ---
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('v');
     const videoData = youtubo_db.videos[videoId];
-    if (!videoData) {
-        document.body.innerHTML = '<h1>Erro: Vídeo não encontrado.</h1>';
-        return;
+    if (!videoData) { return; }
+
+    // --- 2. APLICAR ESTILO DO CANAL (AGORA COM PLAYER BAR) ---
+    const channelData = youtubo_db.channels[videoData.channelId];
+    if (channelData && channelData.style) {
+        const style = channelData.style;
+        const styleElement = document.getElementById('custom-channel-styles');
+        
+        // Define o estilo da barra do player separadamente
+        let playerBarStyle = '';
+        if (style.playerBarBg) {
+            // Regras específicas para a barra customizada
+            playerBarStyle = `
+                #custom-controls {
+                    background: ${style.playerBarBg};
+                }
+                #custom-controls button {
+                    background: transparent;
+                    border: none;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+                    color: #fff;
+                }
+            `;
+        }
+
+        if (styleElement) {
+             styleElement.innerHTML = `
+                body { background: ${style.pageBg || '#f1f1f1'}; font-family: ${style.fontFamily || 'Tahoma'}; }
+                .module {
+                    background-color: ${style.windowColor || '#fff'}; border-color: ${style.borderColor || '#ccc'};
+                    color: ${style.textColor || '#000'}; background-size: cover; background-position: center;
+                    ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
+                    ${style.windowShadow ? 'box-shadow: 0 2px 5px rgba(0,0,0,0.1);' : ''}
+                }
+                #video-description-box a, .module-header h3, .comment-user { color: ${style.linkColor || '#0055aa'}; }
+                ${playerBarStyle}
+             `;
+        }
     }
 
     // --- 3. INICIALIZAR PLAYER E INFORMAÇÕES DA PÁGINA ---
