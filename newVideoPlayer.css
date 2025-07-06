@@ -4,7 +4,7 @@ body { font-family: 'Tahoma', 'Verdana', sans-serif; background-color: #f1f1f1; 
 #page-content { display: flex; width: 970px; margin: 20px auto; gap: 20px; align-items: flex-start; }
 #main-column { flex: 2; }
 #sidebar-column { flex: 1; }
-h1 { font-size: 18px; margin-top: 0; }
+h1 { font-size: 18px; margin: 5px 0; color: #333; }
 a { color: #0055aa; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -35,7 +35,7 @@ a:hover { text-decoration: underline; }
 .ratings .star { font-size: 20px; color: #ccc; cursor: pointer; letter-spacing: 2px; }
 .action-button { background: linear-gradient(to bottom, #fff, #ddd); border: 1px solid #999; border-radius: 4px; padding: 5px 12px; cursor: pointer; font-weight: bold; color: #333; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
 .module { border: 1px solid #ccc; background-color: #fff; margin-top: 15px; border-radius: 0; }
-.module-header { border-radius: 0; }
+.module-header { padding: 5px 15px; border-radius: 0; border-bottom: 1px solid #ccc; margin-bottom: 10px; }
 .module-header h3 { font-size: 14px; margin: 8px 0; color: #333; text-shadow: 1px 1px 0 white; }
 .module-content { padding: 15px; }
 #video-description-box { padding: 10px; }
