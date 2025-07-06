@@ -1,22 +1,63 @@
-body { margin: 0; }
+/* userPage.css - VERSÃO BLOCUDA E BRILHANTE */
+
+body { margin: 0; font-size: 13px; }
 a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
 #content-wrapper { width: 960px; margin: 20px auto; }
-.module { border: 1px solid #ccc; background: #fff; margin-bottom: 15px; position: relative; border-radius: 8px; z-index: 0; }
+
+.module {
+    border: 1px solid #ccc;
+    background: #fff;
+    margin-bottom: 15px;
+    position: relative;
+    border-radius: 0; /* REMOVIDO: Agora é 100% blocudo */
+    z-index: 0;
+}
+
+.module-header {
+    padding: 2px 15px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0; /* REMOVIDO: Agora é blocudo */
+}
+.module-header h3 { font-size: 14px; margin: 8px 0; }
+.module-content { padding: 15px; }
+
+/* (Banner e Profile Box permanecem iguais) */
 #channel-banner { height: 178px; overflow: hidden; }
 #channel-banner img { width: 100%; height: 100%; object-fit: cover; }
 #profile-box { padding: 15px; display: flex; align-items: flex-start; gap: 20px; }
-#profile-pic { width: 88px; height: 88px; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); flex-shrink: 0; z-index: 2; }
+#profile-pic { width: 88px; height: 88px; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); z-index: 2; }
 .profile-details { flex-grow: 1; z-index: 2; }
-.profile-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.profile-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
 .profile-header h3 { margin: 0; font-size: 24px; }
-#channel-bio { margin: 0 0 15px 0; line-height: 1.5; }
-#channel-stats { font-size: 14px; font-weight: bold; }
-#subscribe-btn { font-size: 16px; font-weight: bold; padding: 8px 20px; border-radius: 5px; cursor: pointer; border: 1px solid #c6c6c6; color: #333; text-shadow: 0 1px 0 #fff; background: linear-gradient(to bottom, #fff, #e1e1e1); }
-#subscribe-btn.subscribed { background: #e9e9e9; color: #888; border-color: #dcdcdc; cursor: default; }
-.module-header { padding: 2px 15px; border-bottom: 1px solid #ccc; }
-.module-header h3 { font-size: 14px; margin: 8px 0; }
-.module-content { padding: 15px; }
+
+/* BOTÃO COM MAIS BRILHO */
+#subscribe-btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 4px; /* Mantemos uma pequena curva no botão */
+    cursor: pointer;
+    border: 1px solid #aaa;
+    color: #333;
+    text-shadow: 0 1px 0 #fff;
+    /* Gradiente mais intenso para o brilho */
+    background: linear-gradient(to bottom, #ffffff, #e1e1e1 45%, #d0d0d0 55%, #c1c1c1);
+    /* Sombra interna mais forte para destacar o topo */
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.3);
+}
+#subscribe-btn:hover { border-color: #adadad; }
+#subscribe-btn.subscribed {
+    background: #e9e9e9;
+    color: #888;
+    border-color: #dcdcdc;
+    cursor: default;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    text-shadow: none;
+}
+
+/* (Grade de Vídeos permanece igual) */
 #video-grid { display: flex; flex-wrap: wrap; gap: 15px; }
 .video-item { width: 150px; text-align: center; }
-.video-item b { font-size: 12px; }
 .video-item .thumbnail { width: 100%; height: 94px; object-fit: cover; border: 1px solid #ccc; margin-bottom: 5px; }
