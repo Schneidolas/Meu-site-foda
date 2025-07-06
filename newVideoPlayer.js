@@ -1,5 +1,3 @@
-// newVideoPlayer.js - VERSÃO FINAL E CORRIGIDA
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. DEFINIÇÃO DE TODOS OS ELEMENTOS DO DOM ---
     const videoContainer = document.getElementById('video-container-2007');
@@ -10,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeDisplay = document.getElementById('time-display');
     const progressBar = document.getElementById('progress-bar');
     const progressFilled = document.getElementById('progress-filled');
+    const qualityBtn = document.getElementById('quality-btn');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const stars = document.querySelectorAll('#ratings-container .star');
     const commentInput = document.getElementById('comment-input');
@@ -25,30 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // --- 3. APLICAR ESTILO DO CANAL (AGORA FUNCIONA!) ---
-    const channelData = youtubo_db.channels[videoData.channelId];
-    if (channelData && channelData.style) {
-        const style = channelData.style;
-        const styleElement = document.getElementById('custom-channel-styles');
-        if (styleElement) {
-             styleElement.innerHTML = `
-                body { background: ${style.pageBg || '#f1f1f1'}; font-family: ${style.fontFamily || 'Tahoma'}; }
-                .module {
-                    background-color: ${style.windowColor || '#fff'};
-                    border-color: ${style.borderColor || '#ccc'};
-                    color: ${style.textColor || '#000'};
-                    ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
-                    ${style.windowShadow ? 'box-shadow: 0 2px 5px rgba(0,0,0,0.1);' : ''}
-                }
-                #video-description-box a, .module-header h3, .comment-user {
-                    color: ${style.linkColor || '#0055aa'};
-                }
-             `;
-        }
+    // --- 3. INICIALIZAR PLAYER E INFORMAÇÕES DA PÁGINA ---
+
+    // --- CORREÇÃO PRINCIPAL AQUI ---
+    // Verifica se o vídeo tem múltiplas qualidades ou apenas uma URL
+    const hasMultipleQualities = typeof videoData.url === 'object' && videoData.url !== null;
+    if (hasMultipleQualities) {
+        videoPlayer.src = videoData.url.SD || videoData.url.HD; // Carrega SD por padrão, ou HD se for a única
+        qualityBtn.disabled = !videoData.url.SD || !videoData.url.HD; // Desabilita se não tiver as duas opções
+    } else {
+        videoPlayer.src = videoData.url; // Carrega a URL simples
+        qualityBtn.disabled = true; // Desabilita o botão
     }
 
-    // --- 4. INICIALIZAR PLAYER E INFORMAÇÕES DA PÁGINA ---
-    videoPlayer.src = videoData.url;
     document.title = `${videoData.title} - YouTubo`;
     document.getElementById('video-title').textContent = videoData.title;
     document.getElementById('video-description').textContent = videoData.description;
@@ -56,16 +44,29 @@ document.addEventListener('DOMContentLoaded', () => {
     channelLink.textContent = videoData.channelId;
     channelLink.href = `userPage.html?id=${videoData.channelId}`;
 
+    // --- 4. APLICAR ESTILO DO CANAL ---
+    const channelData = youtubo_db.channels[videoData.channelId];
+    if (channelData && channelData.style) {
+        const style = channelData.style;
+        const styleElement = document.getElementById('custom-channel-styles');
+        if (styleElement) {
+             styleElement.innerHTML = `
+                body { background: ${style.pageBg || '#f1f1f1'}; font-family: ${style.fontFamily || 'Tahoma'}; }
+                .module { background-color: ${style.windowColor || '#fff'}; border-color: ${style.borderColor || '#ccc'}; color: ${style.textColor || '#000'};
+                    ${style.windowBgImage ? `background-image: url('${style.windowBgImage}');` : ''}
+                    ${style.windowShadow ? 'box-shadow: 0 2px 5px rgba(0,0,0,0.1);' : ''} }
+                #video-description-box a, .module-header h3, .comment-user { color: ${style.linkColor || '#0055aa'}; }`;
+        }
+    }
+
     // --- 5. LÓGICA FUNCIONAL DOS CONTROLES ---
 
-    // PLAY / PAUSA
     const togglePlay = () => { videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause(); };
     videoPlayer.addEventListener('play', () => { playPauseBtn.textContent = '❚❚'; });
     videoPlayer.addEventListener('pause', () => { playPauseBtn.textContent = '▶'; });
     playPauseBtn.addEventListener('click', togglePlay);
     videoPlayer.addEventListener('click', togglePlay);
 
-    // BARRA DE PROGRESSO E TEMPO
     videoPlayer.addEventListener('timeupdate', () => {
         progressFilled.style.width = `${(videoPlayer.currentTime / videoPlayer.duration) * 100}%`;
         const formatTime = t => isNaN(t) ? '00:00' : `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -75,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         videoPlayer.currentTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
     });
 
-    // CONTROLE DE VOLUME
     const handleVolume = () => {
         videoPlayer.volume = volumeSlider.value;
         videoPlayer.muted = volumeSlider.value == 0;
@@ -91,13 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeSlider.addEventListener('input', handleVolume);
     handleVolume();
 
-    // TELA CHEIA
+    qualityBtn.addEventListener('click', () => {
+        if (qualityBtn.disabled || !hasMultipleQualities) return;
+        const currentTime = videoPlayer.currentTime;
+        const wasPaused = videoPlayer.paused;
+        const isHD = !qualityBtn.classList.contains('active');
+
+        qualityBtn.classList.toggle('active', isHD);
+        qualityBtn.textContent = isHD ? 'HD' : 'SD';
+        videoPlayer.src = isHD ? videoData.url.HD : videoData.url.SD;
+        
+        videoPlayer.addEventListener('loadeddata', () => {
+            videoPlayer.currentTime = currentTime;
+            if (!wasPaused) videoPlayer.play();
+        }, { once: true });
+    });
+
     fullscreenBtn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-            videoContainer.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
+        if (!document.fullscreenElement) { videoContainer.requestFullscreen(); }
+        else { document.exitFullscreen(); }
     });
 
     // --- 6. LÓGICA DE AVALIAÇÃO (ESTRELAS) ---
