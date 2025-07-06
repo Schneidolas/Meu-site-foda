@@ -47,8 +47,8 @@ const youtubo_db = {
             bio: 'Meu nome é Schneider, faço vídeos para internet, acho que é só isso ._.',
             subscribers: 28345,
             style: {
-                fontFamily: "'Tahoma', 'Verdana', sans-serif",
-                pageBg: "url('https://i.imgur.com/lNPYkaq.gif')", // Fundo da página
+                fontFamily: "'Tahoma', 'Papyrus', sans-serif",
+                pageBg: "url('https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315')", // Fundo da página
                 windowColor: "#241010", // Cor das janelas
                 textColor: "#dad7d7",
                 borderColor: "#3a0000",
