@@ -56,7 +56,7 @@ const youtubo_db = {
                 windowShadow: false, // A janela tem sombra?
                 windowGloss: false, // A janela tem brilho?
                 windowBgImage: "https://img.freepik.com/premium-vector/distress-grunge-texture_707519-7163.jpg", // URL para imagem de fundo da janela (deixar em branco se não usar)
-                playerBarBg: "url('https://img1.picmix.com/output/stamp/normal/8/5/7/6/1186758_a9855.gif')",
+                playerBarBg: "url('https://cdn.pfps.gg/banners/8859-elmo-s-hell-fire.gif')",
             }
         },
         'CanalNostalgia': {
