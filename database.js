@@ -27,6 +27,14 @@ const youtubo_db = {
             thumbnail: 'https://pt.quizur.com/_image?href=https://img.quizur.com/f/img63e930e5e14e53.97204741.jpg?lastEdited=1676226797&w=600&h=600&f=webp',
             description: 'o manoel gomes vai te pegar de noite se vc nn se inscrever ashuashuashaushausha',
             channelId: 'M@ast3rB4nan@'
+        },
+        'dedust2': {
+            id: 'dedust2',
+            title: 'de_dust 2',
+            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/Deftones%20-%20My%20Own%20Summer%20(Official%20Music%20Video)%20%5BHD%20Remaster%5D.mp3",
+            thumbnail: 'https://i.ytimg.com/vi/5Cjrp23lBSM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCELshUZ2cB9NTQQRypUloI954yUg',
+            description: '',
+            channelId: 'Flashdeck'
         }
     },
 
@@ -60,6 +68,25 @@ const youtubo_db = {
             style: {
                 fontFamily: "'Comic Sans', Papyrus",
                 pageBg: "url('https://wallpapers.com/images/hd/rage-comics-faces-meme-xkb1a97vt1j8pqcd.jpg')",
+                windowColor: "#f0f0f0",
+                textColor: "#000000",
+                borderColor: "#444444",
+                linkColor: '#00cc00',
+                windowShadow: false,
+                windowGloss: false,
+                windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
+                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
+            }
+        },
+        'Flashdeck': {
+            name: 'Flashdeck',
+            profilePic: 'https://pbs.twimg.com/profile_images/1498957369/Flashdeck-logo_400x400.png',
+            banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
+            bio: 'Flashdeck é um time de animações!',
+            subscribers: 125987,
+            style: {
+                fontFamily: 'Arial',
+                pageBg: "url('https://static.wikia.nocookie.net/flashdeck/images/f/f4/De_dust2.png/revision/latest/scale-to-width-down/1200?cb=20191209070103')",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
                 borderColor: "#444444",
