@@ -24,7 +24,7 @@ const youtubo_db = {
             id: 'gmodZoeira',
             title: 'A fúria de Manoel gomes! - gmod',
             url: "https://github.com/Schneidolas/music/raw/refs/heads/main/a%20furia%20gmod.mp4",
-            thumbnail: 'https://i9.ytimg.com/vi/cKqmOk0_Xco/mqdefault.jpg?v=64a4d6ba&sqp=COziqsMG&rs=AOn4CLA1QUHybvaQVjWFVZmUSEje-E2rgg',
+            thumbnail: 'https://pt.quizur.com/_image?href=https://img.quizur.com/f/img63e930e5e14e53.97204741.jpg?lastEdited=1676226797&w=600&h=600&f=webp',
             description: 'o manoel gomes vai te pegar de noite se vc nn se inscrever ashuashuashaushausha',
             channelId: 'M@ast3rB4nan@'
         }
