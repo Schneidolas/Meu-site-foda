@@ -31,7 +31,7 @@ const youtubo_db = {
         'dedust2': {
             id: 'dedust2',
             title: 'de_dust 2',
-            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/Deftones%20-%20My%20Own%20Summer%20(Official%20Music%20Video)%20%5BHD%20Remaster%5D.mp3",
+            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/Counter-Strike%20-%20DE%20dust2%20HD.mp4",
             thumbnail: 'https://i.ytimg.com/vi/5Cjrp23lBSM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCELshUZ2cB9NTQQRypUloI954yUg',
             description: '',
             channelId: 'Flashdeck'
