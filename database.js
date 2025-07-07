@@ -83,7 +83,7 @@ const youtubo_db = {
             profilePic: 'https://pbs.twimg.com/profile_images/1498957369/Flashdeck-logo_400x400.png',
             banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
             bio: 'Flashdeck é um time de animações!',
-            subscribers: 125987,
+            subscribers: 59492394,
             style: {
                 fontFamily: 'Arial',
                 pageBg: "url('https://www.patternpictures.com/wp-content/uploads/Crumpled-white-paper-texture-background-768x512.jpg')",
