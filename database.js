@@ -35,7 +35,7 @@ const youtubo_db = {
             thumbnail: 'https://i.ytimg.com/vi/5Cjrp23lBSM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCELshUZ2cB9NTQQRypUloI954yUg',
             description: '',
             channelId: 'Flashdeck'
-        }
+        },
         'dedust2': {
             id: 'dedust2',
             title: 'de_dust 2 (youtube test)',
