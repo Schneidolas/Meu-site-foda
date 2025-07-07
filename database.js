@@ -36,7 +36,7 @@ const youtubo_db = {
             description: '',
             channelId: 'Flashdeck'
         },
-        'dedust2': {
+        'dedust2yt': {
             id: 'dedust2yt',
             title: 'de_dust 2 (youtube test)',
             url: "https://www.youtube.com/watch?v=5Cjrp23lBSM",
