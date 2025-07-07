@@ -35,7 +35,7 @@ const youtubo_db = {
             thumbnail: 'https://i.ytimg.com/vi/5Cjrp23lBSM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCELshUZ2cB9NTQQRypUloI954yUg',
             description: '',
             channelId: 'Flashdeck'
-        },
+        }
     },
 
     // ---- BANCO DE DADOS DE CANAIS (COM CUSTOMIZAÇÃO COMPLETA) ----
