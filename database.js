@@ -75,7 +75,7 @@ const youtubo_db = {
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
-                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
+                playerBarBg: "url('https://sociotramas.wordpress.com/wp-content/uploads/2012/12/remix_and_meme_sociotramas-fw.png')",
             }
         },
         'Flashdeck': {
@@ -86,15 +86,15 @@ const youtubo_db = {
             subscribers: 125987,
             style: {
                 fontFamily: 'Arial',
-                pageBg: "url('https://static.wikia.nocookie.net/flashdeck/images/f/f4/De_dust2.png/revision/latest/scale-to-width-down/1200?cb=20191209070103')",
+                pageBg: "url('https://www.patternpictures.com/wp-content/uploads/Crumpled-white-paper-texture-background-768x512.jpg')",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
                 borderColor: "#444444",
-                linkColor: '#00cc00',
+                linkColor: '#087D07',
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
-                playerBarBg: "linear-gradient(to bottom, #4a4a4a, #2b2b2b)",
+                playerBarBg: "linear-gradient(to bottom, #022701, #087705)",
             }
         }
     }
