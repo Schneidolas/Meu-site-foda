@@ -37,7 +37,7 @@ const youtubo_db = {
             channelId: 'Flashdeck'
         },
         'dedust2': {
-            id: 'dedust2',
+            id: 'dedust2yt',
             title: 'de_dust 2 (youtube test)',
             url: "https://www.youtube.com/watch?v=5Cjrp23lBSM",
             thumbnail: 'https://i.ytimg.com/vi/5Cjrp23lBSM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCELshUZ2cB9NTQQRypUloI954yUg',
