@@ -108,12 +108,12 @@ const youtubo_db = {
         'mestre3224': {
             name: 'mestre3224',
             profilePic: 'https://i1.sndcdn.com/artworks-000043899974-9o4z2a-t500x500.jpg',
-            banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
+            banner: 'https://i.ytimg.com/vi/TUqnm1PdAA8/mqdefault.jpg',
             bio: ':D',
             subscribers: 59492394,
             style: {
                 fontFamily: 'Arial',
-                pageBg: "#f0f0f0",
+                pageBg: "#ffffff",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
                 borderColor: "#444444",
@@ -126,6 +126,7 @@ const youtubo_db = {
         }
     }
 };
+
 
 
 
