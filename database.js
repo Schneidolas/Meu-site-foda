@@ -109,7 +109,7 @@ const youtubo_db = {
             name: 'mestre3224',
             profilePic: 'https://i1.sndcdn.com/artworks-000043899974-9o4z2a-t500x500.jpg',
             banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
-            bio: 'Flashdeck é um time de animações!',
+            bio: ':D',
             subscribers: 59492394,
             style: {
                 fontFamily: 'Arial',
@@ -126,6 +126,7 @@ const youtubo_db = {
         }
     }
 };
+
 
 
 
