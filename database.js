@@ -121,11 +121,12 @@ const youtubo_db = {
                 windowShadow: false,
                 windowGloss: false,
                 windowBgImage: "#f0f0f0",
-                playerBarBg: "linear-gradient(to bottom, #022701, #087705)",
+                playerBarBg: "linear-gradient(to bottom, #f0f0f0, #ffffff)",
             }
         }
     }
 };
+
 
 
 
