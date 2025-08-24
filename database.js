@@ -36,6 +36,14 @@ const youtubo_db = {
             description: '',
             channelId: 'Flashdeck'
         }
+        'madruga': {
+            id: 'madruga',
+            title: 'Seu Madruga Will Go On',
+            url: "https://github.com/Schneidolas/music/raw/refs/heads/main/Seu%20Madruga%20Will%20Go%20On.mp4",
+            thumbnail: 'https://i0.wp.com/www.recantododragao.com.br/wp-content/uploads/2013/07/Seu-Madruga-Will-Go-On-V%C3%ADdeo-Foto-1.jpg',
+            description: '',
+            channelId: 'mestre3224'
+        }
     },
 
     // ---- BANCO DE DADOS DE CANAIS (COM CUSTOMIZAÇÃO COMPLETA) ----
@@ -96,6 +104,26 @@ const youtubo_db = {
                 windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
                 playerBarBg: "linear-gradient(to bottom, #022701, #087705)",
             }
+        },
+        'mestre3224': {
+            name: 'mestre3224',
+            profilePic: 'https://pbs.twimg.com/profile_images/1498957369/Flashdeck-logo_400x400.png',
+            banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
+            bio: 'Flashdeck é um time de animações!',
+            subscribers: 59492394,
+            style: {
+                fontFamily: 'Arial',
+                pageBg: "url('https://www.patternpictures.com/wp-content/uploads/Crumpled-white-paper-texture-background-768x512.jpg')",
+                windowColor: "#f0f0f0",
+                textColor: "#000000",
+                borderColor: "#444444",
+                linkColor: '#087D07',
+                windowShadow: false,
+                windowGloss: false,
+                windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
+                playerBarBg: "linear-gradient(to bottom, #022701, #087705)",
+            }
         }
     }
 };
+
