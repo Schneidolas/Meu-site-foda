@@ -107,24 +107,25 @@ const youtubo_db = {
         },
         'mestre3224': {
             name: 'mestre3224',
-            profilePic: 'https://pbs.twimg.com/profile_images/1498957369/Flashdeck-logo_400x400.png',
+            profilePic: 'https://i1.sndcdn.com/artworks-000043899974-9o4z2a-t500x500.jpg',
             banner: 'https://static.tvtropes.org/pmwiki/pub/images/flashdeck.jpg',
             bio: 'Flashdeck é um time de animações!',
             subscribers: 59492394,
             style: {
                 fontFamily: 'Arial',
-                pageBg: "url('https://www.patternpictures.com/wp-content/uploads/Crumpled-white-paper-texture-background-768x512.jpg')",
+                pageBg: "#f0f0f0",
                 windowColor: "#f0f0f0",
                 textColor: "#000000",
                 borderColor: "#444444",
                 linkColor: '#087D07',
                 windowShadow: false,
                 windowGloss: false,
-                windowBgImage: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Ftroll-face-illustration-wallpaper-30088%2F1024x1024&psig=AOvVaw2hAjwaWrzacm1uSWAmk46R&ust=1751908753997000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLixs-reqI4DFQAAAAAdAAAAABAv",
+                windowBgImage: "#f0f0f0",
                 playerBarBg: "linear-gradient(to bottom, #022701, #087705)",
             }
         }
     }
 };
+
 
 
